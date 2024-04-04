@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        // Toggle inventory visibility when the "I" key is pressed
         if (Input.GetKeyDown(KeyCode.I))
         {
             ToggleVisibility();
@@ -20,7 +19,6 @@ public class Inventory : MonoBehaviour
     {
         isVisible = !isVisible;
 
-        // Set the visibility of each slot
         foreach (GameObject slot in slots)
         {
             slot.SetActive(isVisible);
