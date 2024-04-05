@@ -1,0 +1,388 @@
+fileFormatVersion: 2
+guid: 72b567c04ab4d4c188d0b71506cbbd7a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MaterialOresIngots_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 184
+        width: 74
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1670a8237c7494217b7db3cb311ae401
+      internalID: 733850498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_1
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 175
+        width: 81
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a51d31234cc4f2dbbc866ed54a4d12
+      internalID: -2121644304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_2
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 179
+        width: 82
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983e05a81e77946f2a563cc9e9dcdcae
+      internalID: -1442126992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_3
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 102
+        width: 86
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3987bd30bdb264364b821e98a4947989
+      internalID: 1614600098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_4
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 103
+        width: 80
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ae91fe30ec174079b29629550dbc84e
+      internalID: 8743979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_5
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 102
+        width: 98
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e2fa45d6cd4a40d28914fea8e58c66b
+      internalID: -825543766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_6
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 18
+        width: 92
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c307f723967a444eafeb4391ec2cf03
+      internalID: -399172496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_7
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 18
+        width: 86
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be74134ced3464cc893cc18bc6a86125
+      internalID: 2074308173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaterialOresIngots_8
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 18
+        width: 90
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82034a288f65a4f17847c280b028aebf
+      internalID: 368554432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -141, y: 46.5}
+      - {x: -141, y: 115.5}
+      - {x: -55, y: 115.5}
+      - {x: -55, y: 46.5}
+    - - {x: -44, y: 39.5}
+      - {x: -44, y: 114.5}
+      - {x: 39, y: 114.5}
+      - {x: 39, y: 39.5}
+    - - {x: 51, y: 40.5}
+      - {x: 51, y: 111.5}
+      - {x: 92, y: 121.5}
+      - {x: 136, y: 111.5}
+      - {x: 136, y: 40.5}
+    - - {x: -138, y: -118.5}
+      - {x: -138, y: -41.5}
+      - {x: -55, y: -41.5}
+      - {x: -55, y: -118.5}
+    - - {x: -45, y: -121.5}
+      - {x: -44, y: -42.5}
+      - {x: 43, y: -42.5}
+      - {x: 43, y: -121.5}
+    - - {x: 52, y: -123.5}
+      - {x: 52, y: -41.5}
+      - {x: 137, y: -41.5}
+      - {x: 137, y: -123.5}
+    - - {x: -141, y: -33.5}
+      - {x: -141, y: 35.5}
+      - {x: -49, y: 35.5}
+      - {x: -49, y: -33.5}
+    - - {x: -42, y: -36.5}
+      - {x: -42, y: 33.5}
+      - {x: 40, y: 33.5}
+      - {x: 40, y: -36.5}
+    - - {x: 51, y: -33.5}
+      - {x: 51, y: 33.5}
+      - {x: 142, y: 33.5}
+      - {x: 142, y: -33.5}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      MaterialOresIngots_0: 733850498
+      MaterialOresIngots_1: -2121644304
+      MaterialOresIngots_2: -1442126992
+      MaterialOresIngots_3: 1614600098
+      MaterialOresIngots_4: 8743979
+      MaterialOresIngots_5: -825543766
+      MaterialOresIngots_6: -399172496
+      MaterialOresIngots_7: 2074308173
+      MaterialOresIngots_8: 368554432
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 2511260257478083232}
   - component: {fileID: 4627708874392730934}
   - component: {fileID: 3666926163467600276}
+  - component: {fileID: 1392355178896617435}
+  - component: {fileID: -6226771241828907580}
+  - component: {fileID: 3980732705638311852}
   m_Layer: 5
-  m_Name: GoldIngot_Button
+  m_Name: EmeraldOre 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d746a0c96814c4eebb8aacb6ca13a7fc, type: 3}
+  m_Sprite: {fileID: 2074308173, guid: 72b567c04ab4d4c188d0b71506cbbd7a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -120,3 +123,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1392355178896617435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500194691460039825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba5ab62d915db4bfdb8906621ab8b8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &-6226771241828907580
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500194691460039825}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3980732705638311852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500194691460039825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960036002c5e544a79ef5d5878778038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: EmeraldIngot

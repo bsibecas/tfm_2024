@@ -1,31 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public Rigidbody2D rb;
+    public float sprintSpeed;
+    public float staminaRegenRate;
+    public float maxStamina;
+    public float staminaCostPerSecond;
 
+    private Rigidbody2D rb;
     private Vector2 moveDirection;
+    private bool isSprinting;
+    private float currentStamina;
+    private float chargeRate = 10;
 
-    void Update()
+    private Coroutine recharge;
+    public Image staminaBar;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        currentStamina = maxStamina;
+        UpdateStaminaBar();
+    }
+
+    private void Update()
     {
         ProcessInput();
         Move();
+        UpdateStamina();
     }
 
-    void ProcessInput()
+    private void ProcessInput()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
         moveDirection = new Vector2(moveX, moveY).normalized;
+
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && (Mathf.Abs(moveX) > 0 || Mathf.Abs(moveY) > 0) && currentStamina > 0;
     }
 
-    void Move()
+    private void Move()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        float speed = isSprinting ? sprintSpeed : moveSpeed;
+        rb.velocity = moveDirection * speed;
     }
 
+    private IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+        while (currentStamina < maxStamina)
+        {
+            currentStamina += chargeRate * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+            yield return new WaitForSeconds(.05f);
+            UpdateStaminaBar();
+            yield return null;
+        }
+    }
+
+    private void UpdateStamina()
+    {
+        if (isSprinting)
+        {
+            currentStamina -= staminaCostPerSecond * Time.deltaTime;
+            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+        }
+        else
+        {
+            if (recharge == null)
+            {
+                recharge = StartCoroutine(RechargeStamina());
+            }
+            else if (currentStamina >= maxStamina)
+            {
+                StopCoroutine(recharge);
+                recharge = null;
+            }
+        }
+
+        UpdateStaminaBar();
+    }
+
+
+    private void UpdateStaminaBar()
+    {
+        if (currentStamina < 0) currentStamina = 0;
+        staminaBar.fillAmount = currentStamina / maxStamina;
+    }
+
+   
 }

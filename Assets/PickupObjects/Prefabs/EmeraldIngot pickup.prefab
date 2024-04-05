@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1886134890053902854
+--- !u!1 &1703404094595615620
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1553994061196784718}
-  - component: {fileID: 9029436383828389680}
-  - component: {fileID: 485433155800960895}
-  - component: {fileID: 1799380657552518828}
+  - component: {fileID: 2752808805619332211}
+  - component: {fileID: 1949987104599034750}
+  - component: {fileID: 1672423702157453446}
+  - component: {fileID: 8004918994977646030}
   m_Layer: 0
-  m_Name: GoldIngot pickup
+  m_Name: EmeraldIngot pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1553994061196784718
+--- !u!4 &2752808805619332211
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886134890053902854}
+  m_GameObject: {fileID: 1703404094595615620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.426, y: 0.387, z: 0}
+  m_LocalPosition: {x: -4.73, y: -3.44, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9029436383828389680
+--- !u!212 &1949987104599034750
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886134890053902854}
+  m_GameObject: {fileID: 1703404094595615620}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 368554432, guid: 72b567c04ab4d4c188d0b71506cbbd7a, type: 3}
+  m_Sprite: {fileID: 2074308173, guid: 72b567c04ab4d4c188d0b71506cbbd7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,27 +86,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &485433155800960895
+--- !u!114 &1672423702157453446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886134890053902854}
+  m_GameObject: {fileID: 1703404094595615620}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fde160497eb04bcd8bda095bb2a3a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemButton: {fileID: 5500194691460039825, guid: 2bef9fbf2c71b4c53879215398aff7bc, type: 3}
+  itemButton: {fileID: 5500194691460039825, guid: 9c71a0151d2944100ac0f41b2c29b47d, type: 3}
   pickupRange: 1.5
---- !u!58 &1799380657552518828
+--- !u!58 &8004918994977646030
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886134890053902854}
+  m_GameObject: {fileID: 1703404094595615620}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
