@@ -4,38 +4,43 @@ using UnityEngine;
 
 public class GenerateRandomTasks : MonoBehaviour
 {
-    public GameObject[] spawnPoints;
-    public GameObject[] tasks;
-    public int[] selectedTasks;
+    public GameObject canvas;
+    public GameObject[] imagesToSpawn;
+    public int numberOfImagesToSpawn = 3;
 
-    private void Start()
+    private List<GameObject> spawnedImages = new List<GameObject>();
+
+    void Start()
     {
-        SpawnRandomImage();
-        Debug.Log("YES");
-
-    }
-
-
-    public void SpawnRandomImage()
-    {
-        // Check if there are prefabs available
-        if (tasks.Length == 0)
+        // Check if the canvas is assigned
+        if (canvas == null)
         {
-            Debug.LogError("No prefabs with Item script found.");
+            Debug.LogError("Canvas is not assigned in ImageSpawner.");
             return;
         }
 
-        // Choose a random index
-        int numberOfTasks = Random.Range(0, spawnPoints.Length);
-        int randomTask = Random.Range(0, tasks.Length);
-        int i = 0;
+        float spacingY = 120f;
+        Vector3 initialPosition = new Vector3(-145f, 190f, 0f);
 
-        while (i <= numberOfTasks)
+        for (int i = 0; i < numberOfImagesToSpawn; i++)
         {
-            Debug.Log(selectedTasks[i]);
-            selectedTasks[i] = numberOfTasks;
-            Instantiate(tasks[randomTask], spawnPoints[i].transform.position, Quaternion.identity);
-            i++;
+            GameObject randomImage = Instantiate(imagesToSpawn[Random.Range(0, imagesToSpawn.Length -1)], Vector3.zero, Quaternion.identity, canvas.transform);
+            Destroy(randomImage.GetComponent<DragAndDrop>());
+
+            randomImage.transform.localPosition = initialPosition - new Vector3(0f, i * spacingY, 0f);
+
+            RectTransform rectTransform = randomImage.GetComponent<RectTransform>();
+            rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            spawnedImages.Add(randomImage);
+        }
+    }
+
+    private void OnImageDrop(GameObject image)
+    {
+        if (spawnedImages.Contains(image))
+        {
+            spawnedImages.Remove(image);
+            Destroy(image);
         }
     }
 }

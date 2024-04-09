@@ -33,28 +33,36 @@ public class Craftings : MonoBehaviour
     {
         resultSlot.item = null;
         string currentRecipeString = "";
+        string regularRecipeString = "";
+        string reversedRecipeString = "";
 
         foreach (Item item in itemList)
         {
             if (item != null)
             {
                 currentRecipeString += item.itemName;
+                regularRecipeString += item.itemName;
+                reversedRecipeString = item.itemName + reversedRecipeString;
             }
             else
             {
                 currentRecipeString += "null";
+                regularRecipeString += "null";
+                reversedRecipeString = "null" + reversedRecipeString;
             }
         }
 
         for (int i = 0; i < recipes.Length; i++)
         {
-            if (recipes[i] == currentRecipeString)
+            if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
             {
                 DestroyOtherSlotsItems();
                 Instantiate(recipeResults[i], resultSlot.transform, false);
+                break;
             }
         }
     }
+
 
     void DestroyOtherSlotsItems()
     {
