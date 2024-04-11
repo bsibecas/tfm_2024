@@ -70,7 +70,6 @@ public class GenerateRandomTasks : MonoBehaviour
                         RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
                         rectTransform.localScale = new Vector3(1f, 1f, 1f);
                         Destroy(orderSlot.item.gameObject);
-                        Debug.Log("FOUND");
                         orderList[i] = null;
                         break;
                     }
