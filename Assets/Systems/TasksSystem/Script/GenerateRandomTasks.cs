@@ -65,7 +65,7 @@ public class GenerateRandomTasks : MonoBehaviour
                     if (orderItemName == listItemName)
                     {
                         // Instantiate the image on the canvas
-                        Vector3 position = new Vector3(700f, i * - 135 + i * (i * i) + 560, 0f);
+                        Vector3 position = new Vector3(700f, i * - 135 + i * (i * i) * 5 + 485, 0f);
                         GameObject instantiatedImage = Instantiate(check, position, Quaternion.identity, canvas.transform);
                         RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
                         rectTransform.localScale = new Vector3(1f, 1f, 1f);
