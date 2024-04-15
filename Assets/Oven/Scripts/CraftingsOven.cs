@@ -5,20 +5,30 @@ using UnityEngine.UI;
 
 public class CraftingsOven : MonoBehaviour
 {
+    public float castingTime;
+    public float MaximumCastingTime = 3f;
+    public bool activatedTime = false;
 
     public Image customCursor;
 
-    public GameObject[] craftingSlots;
+    public GameObject[] craftingSlotsOven;
+    
     public bool[] isFull;
 
     public List<Item> itemList;
     public string[] recipes;
     public Item[] recipeResults;
     public ItemSlot resultSlot;
+    public Slider slider;
 
     private void Update()
     {
         CheckForCreatedRecipes();
+
+        if (activatedTime)
+        {
+            CheckTime();
+        }
     }
 
     public void OnClickslot(ItemSlot slot)
@@ -51,31 +61,66 @@ public class CraftingsOven : MonoBehaviour
                 reversedRecipeString = "null" + reversedRecipeString;
             }
         }
+        instantiateItems(currentRecipeString, reversedRecipeString);
+        
+    }
 
+    void instantiateItems(string currentRecipeString, string reversedRecipeString){
         for (int i = 0; i < recipes.Length; i++)
         {
             if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
             {
-                DestroyOtherSlotsItems();
+                ActiveTime();
                 Instantiate(recipeResults[i], resultSlot.transform, false);
+                DestroyOtherSlotsItems();
+
+                
                 break;
             }
         }
     }
-
+    
 
     void DestroyOtherSlotsItems()
     {
-        for (int i = 0; i < craftingSlots.Length; i++)
+        for (int i = 0; i < craftingSlotsOven.Length; i++)
         {
-            if (craftingSlots[i] != resultSlot.gameObject)
+            if (craftingSlotsOven[i] != resultSlot.gameObject)
             {
-                ItemSlot slot = craftingSlots[i].GetComponent<ItemSlot>();
+                ItemSlot slot = craftingSlotsOven[i].GetComponent<ItemSlot>();
                 if (slot != null && slot.item != null)
                 {
                     Destroy(slot.item.gameObject);
                 }
             }
         }
+        
+    }
+
+    private void CheckTime()
+    {
+        castingTime -= Time.deltaTime;
+
+        if(castingTime >= 0){
+            slider.value = castingTime;
+        }
+        if(castingTime <= 0)
+        {
+            StatusTimeChange(false);
+            Debug.Log("Fundido");               
+        }
+    }
+
+    private void StatusTimeChange(bool status)
+    {
+        activatedTime = status;
+    }
+
+    public void ActiveTime()
+    {
+        castingTime = MaximumCastingTime;
+        slider.maxValue = MaximumCastingTime;
+        StatusTimeChange(true);
     }
 }
+

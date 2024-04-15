@@ -7,10 +7,13 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public int index;
 
     private Craftings craftingSlots;
+    private CraftingsOven craftingSlotsOven;
 
     private void Start()
     {
         craftingSlots = GameObject.FindGameObjectWithTag("CraftingTable").GetComponent<Craftings>();
+        craftingSlotsOven = GameObject.FindGameObjectWithTag("Oven").GetComponent<CraftingsOven>();
+
     }
 
     private void Update()
@@ -23,10 +26,19 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 craftingSlots.itemList[index] = null;
             }
         }
+        if(index >= 0 && index < craftingSlotsOven.craftingSlotsOven.Length)
+        {
+            if (transform.childCount <= 0)
+            {
+                craftingSlotsOven.isFull[index] = false;
+                craftingSlotsOven.itemList[index] = null;
+            }
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
+
         if (eventData.pointerDrag != null && craftingSlots.isFull[index] != true)
         {
             RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
@@ -40,6 +52,21 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 item = droppedItem;
                 craftingSlots.itemList[index] = item;
+            }
+        }
+        if (eventData.pointerDrag != null && craftingSlotsOven.isFull[index] != true)
+        {
+            RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+            RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+            itemRectTransform.SetParent(slotRectTransform);
+            itemRectTransform.anchoredPosition = Vector2.zero;
+            craftingSlotsOven.isFull[index] = true;
+            Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
+            if (droppedItem != null)
+            {
+                item = droppedItem;
+                craftingSlotsOven.itemList[index] = item;
             }
         }
     }
