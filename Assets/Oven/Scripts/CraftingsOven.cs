@@ -12,7 +12,7 @@ public class CraftingsOven : MonoBehaviour
     public Image customCursor;
 
     public GameObject[] craftingSlotsOven;
-    
+
     public bool[] isFull;
 
     public List<Item> itemList;
@@ -20,6 +20,8 @@ public class CraftingsOven : MonoBehaviour
     public Item[] recipeResults;
     public ItemSlot resultSlot;
     public Slider slider;
+
+    private int recipeNumber;
 
     private void Update()
     {
@@ -62,24 +64,30 @@ public class CraftingsOven : MonoBehaviour
             }
         }
         instantiateItems(currentRecipeString, reversedRecipeString);
-        
+
     }
 
-    void instantiateItems(string currentRecipeString, string reversedRecipeString){
+    IEnumerator DelayedDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DestroyOtherSlotsItems();
+    }
+
+    void instantiateItems(string currentRecipeString, string reversedRecipeString)
+    {
         for (int i = 0; i < recipes.Length; i++)
         {
             if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
             {
                 ActiveTime();
-                Instantiate(recipeResults[i], resultSlot.transform, false);
-                DestroyOtherSlotsItems();
+                recipeNumber = i;
+                StartCoroutine(DelayedDestroy(0.3f));
 
-                
                 break;
             }
         }
     }
-    
+
 
     void DestroyOtherSlotsItems()
     {
@@ -94,20 +102,23 @@ public class CraftingsOven : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     private void CheckTime()
     {
         castingTime -= Time.deltaTime;
 
-        if(castingTime >= 0){
+        if (castingTime >= 0)
+        {
             slider.value = castingTime;
         }
-        if(castingTime <= 0)
+        if (castingTime <= 0)
         {
             StatusTimeChange(false);
-            Debug.Log("Fundido");               
+            Debug.Log("Fundido");
+            Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+
         }
     }
 
@@ -123,4 +134,3 @@ public class CraftingsOven : MonoBehaviour
         StatusTimeChange(true);
     }
 }
-
