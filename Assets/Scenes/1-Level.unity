@@ -890,7 +890,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 309}
-  m_SizeDelta: {x: 460.9328, y: 110}
+  m_SizeDelta: {x: 460.9328, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &169597016
 MonoBehaviour:
@@ -1636,7 +1636,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -4.50708}
-  m_SizeDelta: {x: 410, y: 40}
+  m_SizeDelta: {x: 410, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &388660554
 GameObject:
@@ -4251,13 +4251,25 @@ MonoBehaviour:
   dialogue:
     name: Boss
     sentences:
-    - 'Start dialogue: Explain you are in your firts day of your new job.
+    - 'Hello, NOOB. Welcome to the BEST workshop on EARTH . Where the clients expect
+      nothing less than PERFECTION. Quality is our top priority and every work of
+      art made is a symbol of BEAUTY.
+
 
 '
-    - Some context and we explain that the tasts you have to do there are in the
-      board.
-    - Some context and we explain that the tasts you have to do there are in the
-      board.
+    - "We\u2019re equipped to fulfill our clients\u2019 most extravagant requests.
+      On the left, our Storage room and the Conveyor Belt with the PUREST materials,
+      NO ONE can DARE TO RIVAL. \n"
+    - 'On the right we have our GORGEOUS shop where clients can request any jewel
+      of their pleasing and buy it just FRESH FROM THE OVEN. Lastly, the CHERRY ON
+      TOP, centered as the beauty it is, THE OVEN!
+
+'
+    - "Oh, I almost forgot, the Noob\u2019s crafting table is top-left. You MUST
+      always start with orders on the whiteboard on the top-right. Now, GO WORK!
+      THOSE MUST BE DONE BEFORE ANY CLIENT COMES IN!\n"
+    - "HEY! The last Noob left some trash written for you to read in a kind of a
+      book (pressing \u201Cp\u201D) .\n"
 --- !u!1 &785078442
 GameObject:
   m_ObjectHideFlags: 0
@@ -7137,7 +7149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -148.6, y: 32.49292}
+  m_AnchoredPosition: {x: -148.6, y: 42}
   m_SizeDelta: {x: 115, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1354863036
@@ -8664,7 +8676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 165, y: -33.50708}
+  m_AnchoredPosition: {x: 165, y: -50}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1674832513
@@ -9648,7 +9660,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.52807677}
+  m_Offset: {x: 0.0026059747, y: -0.13717133}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9659,7 +9671,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.091999}
+  m_Size: {x: 1.0729688, y: 1.3101879}
   m_EdgeRadius: 0
 --- !u!1 &1889191518
 GameObject:
