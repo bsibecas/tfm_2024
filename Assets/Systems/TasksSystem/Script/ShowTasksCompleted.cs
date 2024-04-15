@@ -38,8 +38,6 @@ public class ShowTasksCompleted : MonoBehaviour
             UpdateTaskText(tasksCompleted, numberOfTasks);
         }
 
-
-        Debug.Log("Tasks Completed: " + tasksCompleted);
     }
     public void UpdateTaskText(int tasksCompleted, int numberOfTasks)
     {
