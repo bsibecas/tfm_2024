@@ -14,6 +14,7 @@ public class GenerateRandomTasks : MonoBehaviour
     float spacingY = 160f;
     public float destroyDelay = 2f;
     public GameObject check;
+    public int tasksCompleted = 0;
 
     void Start()
     {
@@ -51,6 +52,7 @@ public class GenerateRandomTasks : MonoBehaviour
         Destroy(item);
     }
 
+
     private void CheckOrderSlot()
     {
         if (orderSlot.item != null)
@@ -64,18 +66,27 @@ public class GenerateRandomTasks : MonoBehaviour
 
                     if (orderItemName == listItemName)
                     {
-                        // Instantiate the image on the canvas
                         Vector3 position = new Vector3(700f, i * - 135 + i * (i * i) * 5 + 485, 0f);
                         GameObject instantiatedImage = Instantiate(check, position, Quaternion.identity, canvas.transform);
                         RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
                         rectTransform.localScale = new Vector3(1f, 1f, 1f);
                         Destroy(orderSlot.item.gameObject);
                         orderList[i] = null;
+                        tasksCompleted++;
                         break;
                     }
                 }
             }
         }
+    }
+    public int GetTasksCompleted()
+    {
+        return tasksCompleted;
+    }
+
+    public int GetNumberOfTasks()
+    {
+        return numberOfImagesToSpawn;
     }
 
 }
