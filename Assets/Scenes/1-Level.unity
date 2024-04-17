@@ -4999,6 +4999,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846800454}
   m_CullTransparentMesh: 1
+--- !u!1 &911478755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 171255591865854683, guid: 6428b51d0030a42c1b767d2c792f5e2d, type: 3}
+  m_PrefabInstance: {fileID: 815495868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &919815361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 949298440501312056, guid: 27e4d651866cf437ca63f61dbdbe1657, type: 3}
@@ -10337,6 +10342,10 @@ PrefabInstance:
       propertyPath: resultSlot
       value: 
       objectReference: {fileID: 417617679}
+    - target: {fileID: 25232498017940528, guid: a638f44beefcd41a5ac77ff13f307e3a, type: 3}
+      propertyPath: craftingSlotsOven.Array.data[0]
+      value: 
+      objectReference: {fileID: 911478755}
     - target: {fileID: 82416287500800073, guid: a638f44beefcd41a5ac77ff13f307e3a, type: 3}
       propertyPath: m_Name
       value: Oven
