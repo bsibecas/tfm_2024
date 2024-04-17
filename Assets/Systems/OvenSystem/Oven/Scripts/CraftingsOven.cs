@@ -63,8 +63,7 @@ public class CraftingsOven : MonoBehaviour
                 reversedRecipeString = "null" + reversedRecipeString;
             }
         }
-        instantiateItems(currentRecipeString, reversedRecipeString);
-
+        InstantiateItems(currentRecipeString, reversedRecipeString);
     }
 
     IEnumerator DelayedDestroy(float delay)
@@ -73,7 +72,7 @@ public class CraftingsOven : MonoBehaviour
         DestroyOtherSlotsItems();
     }
 
-    void instantiateItems(string currentRecipeString, string reversedRecipeString)
+    void InstantiateItems(string currentRecipeString, string reversedRecipeString)
     {
         for (int i = 0; i < recipes.Length; i++)
         {
