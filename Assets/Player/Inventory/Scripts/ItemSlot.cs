@@ -7,15 +7,17 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public int index;
 
     private Craftings craftingSlots;
+    private CraftingsOven craftingSlotsOven;
 
     private void Start()
     {
         craftingSlots = GameObject.FindGameObjectWithTag("CraftingTable").GetComponent<Craftings>();
+        craftingSlotsOven = GameObject.FindGameObjectWithTag("Oven").GetComponent<CraftingsOven>();
     }
 
     private void Update()
     {
-        if (index >= 0 && index < craftingSlots.craftingSlots.Length)
+        if (craftingSlots != null && index >= 0 && index < craftingSlots.craftingSlots.Length)
         {
             if (transform.childCount <= 0)
             {
@@ -23,7 +25,17 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 craftingSlots.itemList[index] = null;
             }
         }
+
+        if (craftingSlotsOven != null && index >= 0 && index < craftingSlotsOven.craftingSlotsOven.Length)
+        {
+            if (transform.childCount <= 0)
+            {
+                craftingSlotsOven.isFull[index] = false;
+                craftingSlotsOven.itemList[index] = null;
+            }
+        }
     }
+
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -42,5 +54,22 @@ public class ItemSlot : MonoBehaviour, IDropHandler
                 craftingSlots.itemList[index] = item;
             }
         }
+
+        if (eventData.pointerDrag != null && craftingSlotsOven.isFull[index] != true)
+        {
+            RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+            RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+            itemRectTransform.SetParent(slotRectTransform);
+            itemRectTransform.anchoredPosition = Vector2.zero;
+            craftingSlotsOven.isFull[index] = true;
+            Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
+            if (droppedItem != null)
+            {
+                item = droppedItem;
+                craftingSlotsOven.itemList[index] = item;
+            }
+        }
     }
+
 }

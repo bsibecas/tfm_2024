@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 61062157}
   m_Layer: 0
   m_Name: Oven
-  m_TagString: Untagged
+  m_TagString: Oven
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,11 +622,11 @@ MonoBehaviour:
   recipes:
   - SilverOre
   - GoldOre
-  - EsmeraldOre
+  - EmeraldOre
   recipeResults:
-  - {fileID: 3980732705638311852, guid: afb2dc46da96b4cc3b5e6809b60794a5, type: 3}
-  - {fileID: 3980732705638311852, guid: 5fa8ce9ff6c6b4e20ac7b21d847b0952, type: 3}
-  - {fileID: 3980732705638311852, guid: 45021ece65fd94ac68f77bc601a14704, type: 3}
+  - {fileID: 3980732705638311852, guid: d7d435d2aedc14e4d873322882f610e3, type: 3}
+  - {fileID: 4695758681767385068, guid: 2bef9fbf2c71b4c53879215398aff7bc, type: 3}
+  - {fileID: 4695758681767385068, guid: 9c71a0151d2944100ac0f41b2c29b47d, type: 3}
   resultSlot: {fileID: 1524083934}
   slider: {fileID: 187523371}
 --- !u!114 &61062161
