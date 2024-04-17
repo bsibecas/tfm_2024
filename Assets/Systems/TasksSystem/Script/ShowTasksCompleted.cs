@@ -5,20 +5,19 @@ using TMPro;
 
 public class ShowTasksCompleted : MonoBehaviour
 {
-    public GameObject Canvas;
     private GenerateRandomTasks generateRandomTasks;
+    private TimeSystem timeSystem;
+
     public TextMeshProUGUI textComponent;
+    public GameObject CanvasTasks;
+    public GameObject CanvasEnd;
+
 
     private void Start()
     {
-        // Find the GenerateRandomTasks component in the scene
-        generateRandomTasks = FindObjectOfType<GenerateRandomTasks>();
+        timeSystem = FindObjectOfType<TimeSystem>();
 
-        if (generateRandomTasks == null)
-        {
-            Debug.LogError("GenerateRandomTasks component not found.");
-            return;
-        }
+        
         if (textComponent == null)
         {
             Debug.LogError("Text component is not assigned in the inspector.");
@@ -28,14 +27,32 @@ public class ShowTasksCompleted : MonoBehaviour
 
     private void Update()
     {
-        
-        int tasksCompleted = generateRandomTasks.GetTasksCompleted();
-        int numberOfTasks = generateRandomTasks.GetNumberOfTasks();
+        float time = timeSystem.GetCastingTime();
 
-        if (tasksCompleted == numberOfTasks)
+        if (time <= 0)
         {
-            ShowTasksCanvas();
-            UpdateTaskText(tasksCompleted, numberOfTasks);
+            ShowTasksCanvas(CanvasTasks);
+        }
+
+        if (CanvasTasks.activeSelf == true)
+        {
+            Debug.Log("YES");
+            generateRandomTasks = FindObjectOfType<GenerateRandomTasks>();
+            if (generateRandomTasks == null)
+            {
+                Debug.LogError("GenerateRandomTasks component not found.");
+                return;
+            }
+
+            int tasksCompleted = generateRandomTasks.GetTasksCompleted();
+            int numberOfTasks = generateRandomTasks.GetNumberOfTasks();
+
+            if (tasksCompleted == numberOfTasks || time <= 0)
+            {
+                UpdateTaskText(tasksCompleted, numberOfTasks);
+                ShowTasksCanvas(CanvasEnd);
+                CanvasTasks.SetActive(false);
+            }
         }
 
     }
@@ -44,7 +61,7 @@ public class ShowTasksCompleted : MonoBehaviour
         textComponent.text = tasksCompleted + "/" + numberOfTasks + " COMPLETED TASKS";
     }
 
-    public void ShowTasksCanvas()
+    public void ShowTasksCanvas(GameObject Canvas)
     {
         if (Canvas != null)
         {
