@@ -39,36 +39,54 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && craftingSlots.isFull[index] != true)
+        if (eventData.pointerDrag != null)
         {
-            RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
-            RectTransform slotRectTransform = GetComponent<RectTransform>();
-
-            itemRectTransform.SetParent(slotRectTransform);
-            itemRectTransform.anchoredPosition = Vector2.zero;
-            craftingSlots.isFull[index] = true;
-            Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
-            if (droppedItem != null)
+            if (craftingSlots != null && index >= 0 && index < craftingSlots.craftingSlots.Length)
             {
-                item = droppedItem;
-                craftingSlots.itemList[index] = item;
+                if (!craftingSlots.isFull[index])
+                {
+                    HandleCraftingTableDrop(eventData);
+                }
+            }
+            if (craftingSlotsOven != null && index >= 0 && index < craftingSlotsOven.craftingSlotsOven.Length)
+            {
+                if (!craftingSlotsOven.isFull[index])
+                {
+                    HandleOvenDrop(eventData);
+                }
             }
         }
+    }
 
-        if (eventData.pointerDrag != null && craftingSlotsOven.isFull[index] != true)
+    private void HandleCraftingTableDrop(PointerEventData eventData)
+    {
+        RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+        RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+        itemRectTransform.SetParent(slotRectTransform);
+        itemRectTransform.anchoredPosition = Vector2.zero;
+        craftingSlots.isFull[index] = true;
+        Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
+        if (droppedItem != null)
         {
-            RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
-            RectTransform slotRectTransform = GetComponent<RectTransform>();
+            item = droppedItem;
+            craftingSlots.itemList[index] = item;
+        }
+    }
 
-            itemRectTransform.SetParent(slotRectTransform);
-            itemRectTransform.anchoredPosition = Vector2.zero;
-            craftingSlotsOven.isFull[index] = true;
-            Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
-            if (droppedItem != null)
-            {
-                item = droppedItem;
-                craftingSlotsOven.itemList[index] = item;
-            }
+    private void HandleOvenDrop(PointerEventData eventData)
+    {
+        RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+        RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+        itemRectTransform.SetParent(slotRectTransform);
+        itemRectTransform.anchoredPosition = Vector2.zero;
+        craftingSlotsOven.isFull[index] = true;
+        Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
+        if (droppedItem != null)
+        {
+            item = droppedItem;
+            craftingSlotsOven.itemList[index] = item;
         }
     }
 
