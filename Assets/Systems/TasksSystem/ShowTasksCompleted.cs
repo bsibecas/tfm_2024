@@ -36,7 +36,6 @@ public class ShowTasksCompleted : MonoBehaviour
 
         if (CanvasTasks.activeSelf == true)
         {
-            Debug.Log("YES");
             generateRandomTasks = FindObjectOfType<GenerateRandomTasks>();
             if (generateRandomTasks == null)
             {
