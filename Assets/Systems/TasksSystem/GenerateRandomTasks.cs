@@ -15,12 +15,19 @@ public class GenerateRandomTasks : MonoBehaviour
     public float destroyDelay = 2f;
     public GameObject check;
     public int tasksCompleted = 0;
+    public List<Image> images;
+    public float targetOpacity = 1f;
 
     void Start()
     {
         if (canvas == null)
         {
             Debug.LogError("Canvas is not assigned in ImageSpawner.");
+            return;
+        }
+        if (images == null)
+        {
+            Debug.LogError("List of images is not initialized!");
             return;
         }
 
@@ -66,10 +73,16 @@ public class GenerateRandomTasks : MonoBehaviour
 
                     if (orderItemName == listItemName)
                     {
-                        Vector3 position = new Vector3(700f, i * - 135 + i * (i * i) * 5 + 485, 0f);
-                        GameObject instantiatedImage = Instantiate(check, position, Quaternion.identity, canvas.transform);
-                        RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
-                        rectTransform.localScale = new Vector3(1f, 1f, 1f);
+                        if (images[i] != null)
+                        {
+                            Color currentColor = images[i].color;
+                            Color newColor = new Color(currentColor.r, currentColor.g, currentColor.b, targetOpacity);
+                            images[i].color = newColor;
+                        }
+                        //Vector3 position = new Vector3(700f, i * - 135 + i * (i * i) * 5 + 485, 0f);
+                        //GameObject instantiatedImage = Instantiate(check, position, Quaternion.identity, canvas.transform);
+                        //RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
+                        //rectTransform.localScale = new Vector3(1f, 1f, 1f);
                         Destroy(orderSlot.item.gameObject);
                         orderList[i] = null;
                         tasksCompleted++;

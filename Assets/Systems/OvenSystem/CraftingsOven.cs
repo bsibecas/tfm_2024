@@ -115,7 +115,6 @@ public class CraftingsOven : MonoBehaviour
         if (castingTime <= 0)
         {
             StatusTimeChange(false);
-            Debug.Log("Fundido");
             Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
 
         }
