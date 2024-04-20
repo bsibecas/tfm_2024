@@ -32,18 +32,16 @@ public class GameSceneManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
 
     //EXTERNAL FUNCTIONS
-    public static void LoadScene(int sceneToLoad)
+    public void LoadScene(int sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
 
