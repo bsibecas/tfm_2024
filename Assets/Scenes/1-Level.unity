@@ -6330,7 +6330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6490523602360780126, guid: 381361c807cb1479fa3e627a02abdb95, type: 3}
       propertyPath: m_WholeNumbers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6809908186763950366, guid: 381361c807cb1479fa3e627a02abdb95, type: 3}
       propertyPath: CanvasEnd
