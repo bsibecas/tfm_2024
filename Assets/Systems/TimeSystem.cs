@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TimeSystem : MonoBehaviour
 {
     private float castingTime;
     private bool activatedTime = false;
 
-    public float MaximumCastingTime = 300f;
+    public float MaximumCastingTime = 60f;
+    public int minuts,seconds;
+    public TextMeshProUGUI textoTimer;
     public Slider slider;
     public GameObject Canvas;
 
@@ -17,18 +20,20 @@ public class TimeSystem : MonoBehaviour
         ActiveTime();
   }
 
-
     void Update()
     {
         if(activatedTime)
         {
             CheckTime();
-        }
+        }   
     }
 
     private void CheckTime()
     {
         castingTime -= Time.deltaTime;
+        minuts = (int)(castingTime / 60f);
+        seconds = (int)(castingTime - minuts * 60f);   
+        textoTimer.text = "" + string.Format("{0}:{1:00}", minuts,seconds);
 
         if(castingTime >=0)
         {
