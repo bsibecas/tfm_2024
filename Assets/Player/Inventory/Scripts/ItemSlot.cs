@@ -90,4 +90,12 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         }
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (gameObject == craftingSlotsOven.resultSlot.gameObject)
+        {
+            craftingSlotsOven.resultSlot.item = null;
+        }
+    }
+
 }

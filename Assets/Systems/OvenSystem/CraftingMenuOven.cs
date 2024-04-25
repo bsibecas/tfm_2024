@@ -5,6 +5,7 @@ public class CraftingMenuOven : MonoBehaviour
     public GameObject OvenCanvas;
     public float pickupRange = 1.5f;
     public Transform playerTransform;
+    public float distanceThreshold = 2.5f;
 
     void CheckMouseClick()
     {
@@ -27,6 +28,11 @@ public class CraftingMenuOven : MonoBehaviour
     void Update()
     {
         CheckMouseClick();
+        float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        if (distanceToPlayer > distanceThreshold)
+        {
+            HideOvenCanvas();
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             HideOvenCanvas();

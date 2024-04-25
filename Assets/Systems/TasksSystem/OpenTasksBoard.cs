@@ -7,6 +7,7 @@ public class OpenTasksBoard : MonoBehaviour
     public GameObject tasksCanvas;
     public float pickupRange = 1.5f;
     public Transform playerTransform;
+    public float distanceThreshold = 2.5f;
 
     void CheckMouseClick()
     {
@@ -29,6 +30,11 @@ public class OpenTasksBoard : MonoBehaviour
     void Update()
     {
         CheckMouseClick();
+        float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        if (distanceToPlayer > distanceThreshold)
+        {
+            HideTasksCanvas();
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             HideTasksCanvas();

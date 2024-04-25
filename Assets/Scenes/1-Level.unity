@@ -814,6 +814,7 @@ MonoBehaviour:
   OvenCanvas: {fileID: 843947954}
   pickupRange: 2
   playerTransform: {fileID: 1958610761}
+  distanceThreshold: 2.5
 --- !u!1 &78328327
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,8 +4163,8 @@ Transform:
   m_GameObject: {fileID: 562840519}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.26, y: 1.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 388660558}
@@ -8497,6 +8498,7 @@ MonoBehaviour:
   craftingCanvas: {fileID: 653503190}
   pickupRange: 1.5
   playerTransform: {fileID: 1958610761}
+  distanceThreshold: 2.5
 --- !u!212 &1228364148
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13222,6 +13224,7 @@ MonoBehaviour:
   tasksCanvas: {fileID: 1970230837}
   pickupRange: 1.5
   playerTransform: {fileID: 1958610761}
+  distanceThreshold: 2.5
 --- !u!61 &1871783906
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ public class CraftingsOven : MonoBehaviour
     public GameObject[] craftingSlotsOven;
 
     public bool[] isFull;
+    private bool isCooking = false;
+
 
     public List<Item> itemList;
     public string[] recipes;
@@ -26,8 +28,7 @@ public class CraftingsOven : MonoBehaviour
     private void Update()
     {
         CheckForCreatedRecipes();
-
-        if (activatedTime)
+        if (isCooking)
         {
             CheckTime();
         }
@@ -35,6 +36,10 @@ public class CraftingsOven : MonoBehaviour
 
     public void OnClickslot(ItemSlot slot)
     {
+        if (isCooking)
+        {
+            return;
+        }
         slot.item = null;
         itemList[slot.index] = null;
         slot.gameObject.SetActive(false);
@@ -43,6 +48,11 @@ public class CraftingsOven : MonoBehaviour
 
     void CheckForCreatedRecipes()
     {
+        if (isCooking || resultSlot.item != null)
+        {
+            return;
+        }
+
         resultSlot.item = null;
         string currentRecipeString = "";
         string regularRecipeString = "";
@@ -63,7 +73,32 @@ public class CraftingsOven : MonoBehaviour
                 reversedRecipeString = "null" + reversedRecipeString;
             }
         }
-        InstantiateItems(currentRecipeString, reversedRecipeString);
+
+        for (int i = 0; i < recipes.Length; i++)
+        {
+            if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
+            {
+                StartCooking(i);
+                break;
+            }
+        }
+    }
+
+    void StartCooking(int recipeIndex)
+    {
+        isCooking = true;
+        recipeNumber = recipeIndex;
+        ActiveTime();
+        StartCoroutine(DelayedDestroy(0.3f));
+    }
+
+    private void CookingFinished()
+    {
+        isCooking = false;
+        Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+        //Item newResultItem = Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+        //resultSlot.item = newResultItem.GetComponent<Item>();
+
     }
 
     IEnumerator DelayedDestroy(float delay)
@@ -72,21 +107,20 @@ public class CraftingsOven : MonoBehaviour
         DestroyOtherSlotsItems();
     }
 
-    void InstantiateItems(string currentRecipeString, string reversedRecipeString)
+    void CheckTime()
     {
-        for (int i = 0; i < recipes.Length; i++)
-        {
-            if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
-            {
-                ActiveTime();
-                recipeNumber = i;
-                StartCoroutine(DelayedDestroy(0.3f));
+        castingTime -= Time.deltaTime;
 
-                break;
-            }
+        if (castingTime >= 0)
+        {
+            slider.value = castingTime;
+        }
+        if (castingTime <= 0)
+        {
+            StatusTimeChange(false);
+            CookingFinished();
         }
     }
-
 
     void DestroyOtherSlotsItems()
     {
@@ -101,34 +135,18 @@ public class CraftingsOven : MonoBehaviour
                 }
             }
         }
-
     }
 
-    private void CheckTime()
-    {
-        castingTime -= Time.deltaTime;
-
-        if (castingTime >= 0)
-        {
-            slider.value = castingTime;
-        }
-        if (castingTime <= 0)
-        {
-            StatusTimeChange(false);
-            Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
-
-        }
-    }
-
-    private void StatusTimeChange(bool status)
-    {
-        activatedTime = status;
-    }
-
-    public void ActiveTime()
+    void ActiveTime()
     {
         castingTime = MaximumCastingTime;
         slider.maxValue = MaximumCastingTime;
         StatusTimeChange(true);
     }
+
+    void StatusTimeChange(bool status)
+    {
+        activatedTime = status;
+    }
+
 }
