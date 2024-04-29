@@ -10,6 +10,7 @@ public class ConveyorBelt : MonoBehaviour
     public float destroyThreshold = 1f;
 
     private float timer = 0f;
+    private int currentIndex = 0;
 
     void Update()
     {
@@ -26,14 +27,36 @@ public class ConveyorBelt : MonoBehaviour
         }
     }
 
+    void ShuffleItems()
+    {
+        // Shuffle the items array using the Fisher-Yates algorithm
+        for (int i = 0; i < items.Length - 1; i++)
+        {
+            int randomIndex = Random.Range(i, items.Length);
+            GameObject temp = items[randomIndex];
+            items[randomIndex] = items[i];
+            items[i] = temp;
+        }
+    }
+
     void SpawnItem()
     {
-        GameObject randomItem = items[Random.Range(0, items.Length)];
+        if (currentIndex >= items.Length)
+        {
+            ShuffleItems();
+            currentIndex = 0;
+        }
+
+        GameObject randomItem = items[currentIndex];
         GameObject spawnedItem = Instantiate(randomItem, spawnPoint.position, Quaternion.identity);
         spawnedItem.tag = "BeltItem";
 
         MoveItem(spawnedItem);
+
+        currentIndex++;
     }
+
+
 
     void MoveItem(GameObject item)
     {
