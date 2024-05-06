@@ -41,6 +41,7 @@ public class ConveyorBelt : MonoBehaviour
 
     void SpawnItem()
     {
+        Renderer renderer = null;
         if (currentIndex >= items.Length)
         {
             ShuffleItems();
@@ -49,8 +50,11 @@ public class ConveyorBelt : MonoBehaviour
 
         GameObject randomItem = items[currentIndex];
         GameObject spawnedItem = Instantiate(randomItem, spawnPoint.position, Quaternion.identity);
-        spawnedItem.tag = "BeltItem";
+        renderer = spawnedItem.GetComponent<Renderer>();
 
+        spawnedItem.tag = "BeltItem";
+        if(renderer) renderer.sortingLayerName = "AboveUI";
+        
         MoveItem(spawnedItem);
 
         currentIndex++;

@@ -2,10 +2,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameSceneManager : MonoBehaviour
+public class LoadingSceneManager : MonoBehaviour
 {
     //DECLARATIONS
-    public static GameSceneManager INSTANCE;
+    public static LoadingSceneManager INSTANCE;
 
     public enum GameScenes
     { 
