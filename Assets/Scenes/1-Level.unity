@@ -13291,6 +13291,68 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1221532326388241162, guid: 01f00422c271749a0ab734715b34a024, type: 3}
   m_PrefabInstance: {fileID: 414496430350069953}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1869604639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1869604641}
+  - component: {fileID: 1869604640}
+  - component: {fileID: 1869604642}
+  m_Layer: 0
+  m_Name: EventHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1869604640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869604639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91068680bbc54a8d9d2bc55f71290b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puddlePrefab: {fileID: 7608147475835935578, guid: 50f4325b668084a2dbde8f8106a4ed69, type: 3}
+  maxPuddles: 5
+  spawnInterval: 5
+  spawnAreaSize: {x: 10, y: 6}
+--- !u!4 &1869604641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869604639}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869604642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869604639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33632bcabf3f0440bbef9d9909cff893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puddleSpawner: {fileID: 1869604640}
 --- !u!1 &1871783902
 GameObject:
   m_ObjectHideFlags: 0
@@ -13835,6 +13897,7 @@ MonoBehaviour:
   staminaRegenRate: 0
   maxStamina: 100
   staminaCostPerSecond: 20
+  slipDuration: 0.5
   staminaBar: {fileID: 113654565}
 --- !u!212 &1958610760
 SpriteRenderer:
@@ -15222,3 +15285,4 @@ SceneRoots:
   - {fileID: 415309507}
   - {fileID: 1979796830}
   - {fileID: 156329020}
+  - {fileID: 1869604641}

@@ -7,6 +7,8 @@ TagManager:
   - BeltItem
   - InventoryCanvas
   - CraftingTable
+  - Oven
+  - Puddle
   layers:
   - Default
   - TransparentFX
