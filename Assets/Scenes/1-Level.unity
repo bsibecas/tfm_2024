@@ -13302,6 +13302,7 @@ GameObject:
   - component: {fileID: 1869604641}
   - component: {fileID: 1869604640}
   - component: {fileID: 1869604642}
+  - component: {fileID: 1869604643}
   m_Layer: 0
   m_Name: EventHandler
   m_TagString: Untagged
@@ -13321,8 +13322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91068680bbc54a8d9d2bc55f71290b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puddlePrefab: {fileID: 7608147475835935578, guid: 50f4325b668084a2dbde8f8106a4ed69, type: 3}
-  maxPuddles: 5
+  obstaclePrefab: {fileID: 7608147475835935578, guid: 50f4325b668084a2dbde8f8106a4ed69, type: 3}
+  maxObstacle: 5
   spawnInterval: 5
   spawnAreaSize: {x: 10, y: 6}
 --- !u!4 &1869604641
@@ -13353,6 +13354,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puddleSpawner: {fileID: 1869604640}
+  trashSpawner: {fileID: 1869604643}
+--- !u!114 &1869604643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869604639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91068680bbc54a8d9d2bc55f71290b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 1167498705946083884, guid: 95c1727386b294f0b953a3bd3aa1c4a7, type: 3}
+  maxObstacle: 5
+  spawnInterval: 5
+  spawnAreaSize: {x: 10, y: 6}
 --- !u!1 &1871783902
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public PuddleSpawner puddleSpawner;
+    public ObstacleSpawner puddleSpawner;
+    public ObstacleSpawner trashSpawner;
 
     private void Start()
     {
@@ -15,8 +16,13 @@ public class EventManager : MonoBehaviour
 
         if (randomValue <= 0.2f)
         {
-            puddleSpawner.TriggerPuddleEvent();
+            puddleSpawner.TriggerObstacleEvent();
             Debug.Log("Puddle event triggered!");
+        }
+        else if (randomValue <= 0.9f)
+        {
+            trashSpawner.TriggerObstacleEvent();
+            Debug.Log("Trash event triggered!");
         }
         else
         {

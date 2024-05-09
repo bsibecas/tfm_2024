@@ -9,6 +9,7 @@ TagManager:
   - CraftingTable
   - Oven
   - Puddle
+  - Trash
   layers:
   - Default
   - TransparentFX

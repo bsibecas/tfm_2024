@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRegenRate;
     public float maxStamina;
     public float staminaCostPerSecond;
-    public float slipDuration = 0.4f;
+    public float slipDuration = 0.6f;
 
     private float originalSpeed;
     private float originalSprintSpeed;
@@ -102,18 +102,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Puddle"))
         {
-            StartCoroutine(SlipOff());
+            StartCoroutine(SlipOff(3f));
+        } else if (other.CompareTag("Trash"))
+        {
+            StartCoroutine(SlipOff(0.3f));
         }
     }
 
-    private IEnumerator SlipOff()
+    private IEnumerator SlipOff(float speedModif)
     {
         if (isSprinting == true)
         {
-            sprintSpeed = originalSprintSpeed * 2;
+            sprintSpeed = originalSprintSpeed * speedModif;
         } else
         {
-            moveSpeed = originalSpeed * 3;
+            moveSpeed = originalSpeed * speedModif;
         }
         yield return new WaitForSeconds(slipDuration);
         moveSpeed = originalSpeed;
