@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class AI_Client : MonoBehaviour
 {
@@ -13,17 +14,19 @@ public class AI_Client : MonoBehaviour
     }
 
     [SerializeField] float movSpeed = 50f;
-    [SerializeField] float minWait = 45f;
-    [SerializeField] float maxWait = 96f;
-    [SerializeField] Material rageMaterial;
+    [SerializeField] float minWait = 15f;
+    [SerializeField] float maxWait = 25f;
+    [SerializeField] float destroyDelay = 4f;
+    [SerializeField] GameObject rageDisplayer;
 
     private ClientState currentState;
     private Rigidbody2D rb;
+    private Material rageMaterial;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rageMaterial = gameObject.GetComponentInChildren<Renderer>().material;
+        rageMaterial = rageDisplayer.GetComponent<SpriteRenderer>().material;
     }
 
     private void Start()
@@ -45,7 +48,7 @@ public class AI_Client : MonoBehaviour
                 break;
 
             case (int)ClientState.RageState:
-                Rage();
+                StartCoroutine(Rage());
                 break;
 
             case (int)ClientState.ExitShopState:
@@ -68,21 +71,30 @@ public class AI_Client : MonoBehaviour
         ManageNewState((int)currentState);
     }
 
-    private void Rage()
+    IEnumerator Rage()
     {
-        Debug.Log("RageState");
-        //Sprite fills with red anim
-        //Get mad standing still anim
-        //Yell
+        float progress = 0.0f;
+
+        while (progress < 1)
+        { 
+            progress += Time.deltaTime * 0.1f;
+            rageMaterial.SetFloat("_RageProgress", progress);
+            yield return new WaitForEndOfFrame();
+            //Debug.Log("Rage Progress: " + progress);
+        }
+        
         currentState = ClientState.ExitShopState;
         ManageNewState((int)currentState);
+
+        //TO DO
+        //Get mad standing still anim
+        //Yell
     }
 
     private void ExitShop() 
     {
-        Debug.Log("ExitState");
-        //Move right
-        //Destroy once it is offscreen
+        rb.AddForce(Vector2.right * movSpeed);
+        Destroy(gameObject, destroyDelay);
     }
 
 
@@ -91,6 +103,13 @@ public class AI_Client : MonoBehaviour
         return (int)currentState;
     }
 
+    //DEBUG
+    //private void Update()
+    //{
+    //    Debug.Log(currentState);
+    //    Debug.Log(rageMaterial.ToString());
+    //}
 
-    
+
+
 }

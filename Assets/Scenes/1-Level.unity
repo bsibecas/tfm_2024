@@ -13070,8 +13070,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movSpeed: 80
-  minWait: 30
-  maxWait: 60
+  minWait: 3
+  maxWait: 6
+  destroyDelay: 2
+  rageDisplayer: {fileID: 2041649822}
 --- !u!61 &1791140075
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13230,7 +13232,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c9e6812446f85114080951dc80e1d370, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95757f2ff3b0eb84eba573a05691e7a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14705,7 +14707,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c9e6812446f85114080951dc80e1d370, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95757f2ff3b0eb84eba573a05691e7a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
