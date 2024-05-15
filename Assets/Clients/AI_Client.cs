@@ -15,6 +15,7 @@ public class AI_Client : MonoBehaviour
     [SerializeField] float movSpeed = 50f;
     [SerializeField] float minWait = 45f;
     [SerializeField] float maxWait = 96f;
+    [SerializeField] Material rageMaterial;
 
     private ClientState currentState;
     private Rigidbody2D rb;
@@ -22,6 +23,7 @@ public class AI_Client : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rageMaterial = gameObject.GetComponentInChildren<Renderer>().material;
     }
 
     private void Start()
