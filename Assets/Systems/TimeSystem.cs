@@ -39,6 +39,7 @@ public class TimeSystem : MonoBehaviour
         {
             slider.value = castingTime;
         }
+
         if(castingTime <= 0)
         {
             Debug.Log("Final");
