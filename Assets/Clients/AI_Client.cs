@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
@@ -7,40 +8,56 @@ public class AI_Client : MonoBehaviour
 {
     public enum ClientState
     {
-        EnterShopState = 1,
+        WalkingState = 1,
         WaitingState = 2,
         RageState = 3,
         ExitShopState = 4,
     }
 
-    [SerializeField] float movSpeed = 50f;
+    [SerializeField] float movSpeed = 15f;
     [SerializeField] float minWait = 15f;
     [SerializeField] float maxWait = 25f;
     [SerializeField] float destroyDelay = 4f;
     [SerializeField] GameObject rageDisplayer;
 
     private ClientState currentState;
-    private Rigidbody2D rb;
     private Material rageMaterial;
+    private Transform[] goToPositions;
+    private bool isWalking = false;
+    private int currentTargetID = 0;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         rageMaterial = rageDisplayer.GetComponent<SpriteRenderer>().material;
     }
 
     private void Start()
     {
-        currentState = ClientState.EnterShopState;
+        InitGoToPositions();
+
+        currentState = ClientState.WalkingState;
         ManageNewState((int)currentState);
+    }
+
+    private void InitGoToPositions()
+    {
+        GameObject positionsContainer = GameObject.Find("ClientTargetPoints");
+        goToPositions = new Transform[positionsContainer.transform.childCount];
+
+        for (int i = 0; i < goToPositions.Length; i++)
+        {
+            goToPositions[i] = positionsContainer.transform.GetChild(i);
+            //Debug.Log(goToPositions[i].name);
+        }
     }
 
     private void ManageNewState(int state)
     { 
         switch (state)
         {
-            case (int)ClientState.EnterShopState:
-                rb.AddForce(Vector2.left * movSpeed);
+            case (int)ClientState.WalkingState:
+                isWalking = true;
+                GoToTargetPoint(currentTargetID);
                 break;
 
             case (int)ClientState.WaitingState:
@@ -56,12 +73,39 @@ public class AI_Client : MonoBehaviour
                 break;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void Update()
     {
-        rb.velocity = Vector2.zero;
-        currentState = ClientState.WaitingState;
-        ManageNewState((int)currentState);
+
+        if(isWalking && currentTargetID < goToPositions.Length)
+        {
+            EnterMovement();
+
+            if (transform.position == goToPositions[goToPositions.Length - 1].position)
+            {
+                isWalking = false;
+                currentState = ClientState.WaitingState;
+                ManageNewState((int)currentState);
+            }
+        }
+
     }
+
+    private void EnterMovement()
+    {
+        GoToTargetPoint(currentTargetID);
+        if (Vector2.Distance(transform.position, goToPositions[currentTargetID].position) <= 0.5f)
+        {
+            if (currentTargetID != goToPositions.Length - 1) { currentTargetID++; }
+            GoToTargetPoint(currentTargetID);
+        }
+    }
+
+    private void GoToTargetPoint(int ID)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, goToPositions[ID].position, movSpeed * Time.deltaTime*0.1f);
+    }
+
 
     IEnumerator Wait() 
     {
@@ -93,7 +137,6 @@ public class AI_Client : MonoBehaviour
 
     private void ExitShop() 
     {
-        rb.AddForce(Vector2.right * movSpeed);
         Destroy(gameObject, destroyDelay);
     }
 
