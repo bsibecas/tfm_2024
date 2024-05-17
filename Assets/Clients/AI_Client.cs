@@ -57,7 +57,6 @@ public class AI_Client : MonoBehaviour
         {
             case (int)ClientState.WalkingState:
                 isWalking = true;
-                GoToTargetPoint(currentTargetID);
                 break;
 
             case (int)ClientState.WaitingState:
@@ -76,7 +75,6 @@ public class AI_Client : MonoBehaviour
 
     private void Update()
     {
-
         if(isWalking && currentTargetID < goToPositions.Length)
         {
             EnterMovement();
