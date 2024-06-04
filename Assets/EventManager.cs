@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
             puddleSpawner.TriggerObstacleEvent();
             Debug.Log("Puddle event triggered!");
         }
-        else if (randomValue <= 0.9f)
+        else if (randomValue <= 0.5f)
         {
             trashSpawner.TriggerObstacleEvent();
             Debug.Log("Trash event triggered!");

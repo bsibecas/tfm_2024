@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class GenerateRandomTasks : MonoBehaviour
 {
@@ -14,12 +14,16 @@ public class GenerateRandomTasks : MonoBehaviour
     float spacingY = 160f;
     public float destroyDelay = 2f;
     public GameObject check;
-    public int tasksCompleted = 0;
+    //public int tasksCompleted = 0;
     public List<Image> images;
     public float targetOpacity = 1f;
 
+    public MoneyManager moneyManager;
+
     void Start()
     {
+        GameManager.tasksCompleted = 0;
+
         if (canvas == null)
         {
             Debug.LogError("Canvas is not assigned in ImageSpawner.");
@@ -45,6 +49,7 @@ public class GenerateRandomTasks : MonoBehaviour
             rectTransform.localScale = new Vector3(1f, 1f, 1f);
             orderList[i] = randomImage;
         }
+
     }
 
 
@@ -84,8 +89,11 @@ public class GenerateRandomTasks : MonoBehaviour
                         //RectTransform rectTransform = instantiatedImage.GetComponent<RectTransform>();
                         //rectTransform.localScale = new Vector3(1f, 1f, 1f);
                         Destroy(orderSlot.item.gameObject);
+                        moneyManager.AddMoney(orderList[i].GetComponent<Item>().price);
                         orderList[i] = null;
-                        tasksCompleted++;
+                        GameManager.tasksCompleted++;
+
+
                         break;
                     }
                 }
@@ -94,7 +102,7 @@ public class GenerateRandomTasks : MonoBehaviour
     }
     public int GetTasksCompleted()
     {
-        return tasksCompleted;
+        return GameManager.tasksCompleted;
     }
 
     public int GetNumberOfTasks()

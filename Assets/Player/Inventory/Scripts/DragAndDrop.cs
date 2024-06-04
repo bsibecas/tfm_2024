@@ -1,5 +1,49 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+/*
+public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+{
+    private Object canvas;
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+    private Vector2 originalPosition;
+
+
+    private void Awake()
+    {
+        canvas = GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<Object>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        rectTransform = GetComponent<RectTransform>();
+        originalPosition = rectTransform.anchoredPosition;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        canvasGroup.alpha = .6f;
+        canvasGroup.blocksRaycasts = false;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        rectTransform.anchoredPosition += eventData.delta;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+
+        if (!eventData.pointerEnter || !eventData.pointerEnter.GetComponent<ItemSlot>() || eventData.pointerEnter.GetComponent<OnlyDragSlot>())
+        {
+            rectTransform.anchoredPosition = originalPosition;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+    }
+}
+*/
 
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
