@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShowTasksCompleted : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class ShowTasksCompleted : MonoBehaviour
 
     public void ShowTasksCanvas(GameObject Canvas)
     {
+        SceneManager.LoadScene("2-LevelClear");
+
         if (Canvas != null)
         {
             Canvas.SetActive(true);
