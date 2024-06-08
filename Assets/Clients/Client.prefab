@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4452148024584161756}
   m_Layer: 0
   m_Name: Client
-  m_TagString: Untagged
+  m_TagString: Client
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,11 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b82bd778da18b4984e062b94007811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movSpeed: 15
+  movSpeed: 5
   minWait: 3
   maxWait: 6
   destroyDelay: 2
   rageDisplayer: {fileID: 8069072591685935387}
+  clientTasks: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &655922727118209842
 MonoBehaviour:
   m_ObjectHideFlags: 0

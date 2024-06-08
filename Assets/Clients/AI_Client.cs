@@ -1,160 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-/*
-public class AI_Client : MonoBehaviour
-{
-    public enum ClientState
-    {
-        WalkingState = 1,
-        WaitingState = 2,
-        RageState = 3,
-        ExitShopState = 4,
-    }
-
-    [SerializeField] float movSpeed = 15f;
-    [SerializeField] float minWait = 15f;
-    [SerializeField] float maxWait = 25f;
-    [SerializeField] float destroyDelay = 4f;
-    [SerializeField] GameObject rageDisplayer;
-
-    private ClientState currentState;
-    private Material rageMaterial;
-    private Transform[] goToPositions;
-    private bool isWalking = false;
-    private int currentTargetID = 0;
-
-    private void Awake()
-    {
-        rageMaterial = rageDisplayer.GetComponent<SpriteRenderer>().material;
-    }
-
-    private void Start()
-    {
-        InitGoToPositions();
-
-        currentState = ClientState.WalkingState;
-        ManageNewState((int)currentState);
-    }
-
-    private void InitGoToPositions()
-    {
-        GameObject positionsContainer = GameObject.Find("ClientTargetPoints");
-        goToPositions = new Transform[positionsContainer.transform.childCount];
-
-        for (int i = 0; i < goToPositions.Length; i++)
-        {
-            goToPositions[i] = positionsContainer.transform.GetChild(i);
-            //Debug.Log(goToPositions[i].name);
-        }
-    }
-
-    private void ManageNewState(int state)
-    { 
-        switch (state)
-        {
-            case (int)ClientState.WalkingState:
-                isWalking = true;
-                break;
-
-            case (int)ClientState.WaitingState:
-                StartCoroutine(Wait());
-                break;
-
-            case (int)ClientState.RageState:
-                StartCoroutine(Rage());
-                break;
-
-            case (int)ClientState.ExitShopState:
-                ExitShop();
-                break;
-        }
-    }
-
-    private void Update()
-    {
-        if(isWalking && currentTargetID < goToPositions.Length)
-        {
-            EnterMovement();
-
-            if (transform.position == goToPositions[goToPositions.Length - 1].position)
-            {
-                isWalking = false;
-                currentState = ClientState.WaitingState;
-                ManageNewState((int)currentState);
-            }
-        }
-
-    }
-
-    private void EnterMovement()
-    {
-        GoToTargetPoint(currentTargetID);
-        if (Vector2.Distance(transform.position, goToPositions[currentTargetID].position) <= 0.5f)
-        {
-            if (currentTargetID != goToPositions.Length - 1) { currentTargetID++; }
-            GoToTargetPoint(currentTargetID);
-        }
-    }
-
-    private void GoToTargetPoint(int ID)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, goToPositions[ID].position, movSpeed * Time.deltaTime*0.1f);
-    }
-
-
-    IEnumerator Wait() 
-    {
-        float delay = Random.Range(minWait, maxWait);
-        yield return new WaitForSeconds(delay);
-        currentState = ClientState.RageState;
-        ManageNewState((int)currentState);
-    }
-
-    IEnumerator Rage()
-    {
-        float progress = 0.0f;
-
-        while (progress < 1)
-        { 
-            progress += Time.deltaTime * 0.1f;
-            rageMaterial.SetFloat("_RageProgress", progress);
-            yield return new WaitForEndOfFrame();
-            //Debug.Log("Rage Progress: " + progress);
-        }
-        
-        currentState = ClientState.ExitShopState;
-        ManageNewState((int)currentState);
-
-        //TO DO
-        //Get mad standing still anim
-        //Yell
-    }
-
-    private void ExitShop() 
-    {
-        Destroy(gameObject, destroyDelay);
-    }
-
-
-    public int GetClientState()
-    {
-        return (int)currentState;
-    }
-
-    //DEBUG
-    //private void Update()
-    //{
-    //    Debug.Log(currentState);
-    //    Debug.Log(rageMaterial.ToString());
-    //}
-
-
-
-}*/
-
 
 public class AI_Client : MonoBehaviour
 {
@@ -172,11 +18,12 @@ public class AI_Client : MonoBehaviour
     public delegate void PositionReachedHandler(Transform position);
     public event PositionReachedHandler OnPositionReached;
 
-    [SerializeField] float movSpeed = 15f;
-    [SerializeField] float minWait = 15f;
-    [SerializeField] float maxWait = 25f;
-    [SerializeField] float destroyDelay = 4f;
-    [SerializeField] GameObject rageDisplayer;
+    [SerializeField] private float movSpeed = 4f;
+    [SerializeField] private float minWait = 15f;
+    [SerializeField] private float maxWait = 25f;
+    [SerializeField] private float destroyDelay = 4f;
+    [SerializeField] private GameObject rageDisplayer;
+    [SerializeField] private GenerateRandomTasks clientTasks;
 
     private ClientState currentState;
     private Material rageMaterial;
@@ -185,18 +32,33 @@ public class AI_Client : MonoBehaviour
     private int currentTargetID = 0;
     private Transform targetPosition;
     private ClientManager clientManager;
+    public Animator animator;
 
     private void Awake()
     {
+        clientTasks = GetComponent<GenerateRandomTasks>();
+
         rageMaterial = rageDisplayer.GetComponent<SpriteRenderer>().material;
+
+        GameObject animatorObject = GameObject.FindWithTag("TaskAnimator");
+        if (animatorObject != null)
+        {
+            animator = animatorObject.GetComponent<Animator>();
+            if (animator == null)
+            {
+                Debug.LogWarning("Animator component not found on the GameObject with tag 'TaskAnimator'.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("GameObject with tag 'TaskAnimator' not found.");
+        }
     }
 
     private void Start()
-    { 
+    {
         InitGoToPositions();
-        targetPosition = FindAvailablePosition(-1);
-        currentState = ClientState.WalkingState;
-        ManageNewState((int)currentState);
+        MoveToNextAvailableSpawnPoint();
     }
 
     public void SetGoToPositions(Transform[] positions)
@@ -227,47 +89,96 @@ public class AI_Client : MonoBehaviour
         goToPositions = availablePositions.ToArray();
     }
 
-    private Transform FindAvailablePosition(int position)
+    private void MoveToNextAvailableSpawnPoint()
     {
-        if (goToPositions.Length > 0)
+        if (goToPositions.Length == 0) return;
+
+        int nextIndex = -1;
+        for (int i = 0; i < goToPositions.Length; i++)
         {
-            return goToPositions[goToPositions.Length + position];
+            if (goToPositions[i].GetComponent<EmptyPlace>().emptyPlace)
+            {
+                nextIndex = i;
+                break;
+            }
         }
-        return null;
+
+        if (nextIndex != -1)
+        {
+            targetPosition = goToPositions[nextIndex];
+            currentTargetID = nextIndex;
+            currentState = ClientState.WalkingState;
+            ManageNewState((int)currentState);
+        }
+        else
+        {
+            currentState = ClientState.ExitShopState;
+            ManageNewState((int)currentState);
+        }
     }
 
     private void ManageNewState(int state)
     {
-        switch (state)
+        switch ((ClientState)state)
         {
-            case (int)ClientState.WalkingState:
+            case ClientState.WalkingState:
                 isWalking = true;
+                StartCoroutine(MoveToTarget(targetPosition, movSpeed));
                 break;
-            case (int)ClientState.WaitingState:
+            case ClientState.WaitingState:
                 StartCoroutine(Wait());
                 break;
-            case (int)ClientState.RageState:
+            case ClientState.RageState:
                 StartCoroutine(Rage());
                 break;
-            case (int)ClientState.ExitShopState:
-                ExitShop();
+            case ClientState.ExitShopState:
+                StartCoroutine(MoveAndExit());
                 break;
         }
     }
 
     private void Update()
     {
-        InitGoToPositions();
-        targetPosition = FindAvailablePosition(-1);
-        if (isWalking && targetPosition != null)
-        {
-            EnterMovement();
+        VerifyOrderList();
+    }
 
-            if (transform.position == targetPosition.position)
+    private void VerifyOrderList()
+    {
+        GameObject[] orderedItems = clientTasks.GetOrderList();
+
+        int tasksCompleted = 0;
+        for (int x = 0; x < orderedItems.Length; x++)
+        {
+            if (orderedItems[x] == null)
+            {
+                tasksCompleted++;
+            }
+        }
+        if (tasksCompleted == orderedItems.Length)
+        {
+            currentState = ClientState.ExitShopState;
+            ManageNewState((int)currentState);
+        }
+    }
+
+    private IEnumerator MoveToTarget(Transform target, float speed)
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = target.position;
+        float distance = Vector3.Distance(startPosition, targetPosition);
+        float startTime = Time.time;
+
+        while (isWalking)
+        {
+            float coveredDistance = (Time.time - startTime) * speed;
+            float fractionOfJourney = coveredDistance / distance;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, EaseInOutQuad(fractionOfJourney));
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isWalking = false;
-                OnPositionReached?.Invoke(targetPosition);
-                EmptyPlace targetPoint = targetPosition.GetComponent<EmptyPlace>();
+                OnPositionReached?.Invoke(target);
+                EmptyPlace targetPoint = target.GetComponent<EmptyPlace>();
                 if (targetPoint != null)
                 {
                     targetPoint.emptyPlace = false;
@@ -275,25 +186,14 @@ public class AI_Client : MonoBehaviour
                 currentState = ClientState.WaitingState;
                 ManageNewState((int)currentState);
             }
+
+            yield return null;
         }
     }
 
-    private void EnterMovement()
+    private float EaseInOutQuad(float t)
     {
-        GoToTargetPoint(currentTargetID);
-        if (Vector2.Distance(transform.position, goToPositions[currentTargetID].position) <= 0.5f)
-        {
-            if (currentTargetID != goToPositions.Length - 1)
-            {
-                currentTargetID++;
-            }
-            GoToTargetPoint(currentTargetID);
-        }
-    }
-
-    private void GoToTargetPoint(int ID)
-    {
-        transform.position = Vector2.MoveTowards(transform.position, goToPositions[ID].position, movSpeed * Time.deltaTime * 0.1f);
+        return t < 0.5f ? 2 * t * t : -1 + (4 - 2 * t) * t;
     }
 
     IEnumerator Wait()
@@ -310,7 +210,7 @@ public class AI_Client : MonoBehaviour
 
         while (progress < 1)
         {
-            progress += Time.deltaTime * 0.1f;
+            progress += Time.deltaTime * 0.01f;
             rageMaterial.SetFloat("_RageProgress", progress);
             yield return new WaitForEndOfFrame();
         }
@@ -319,14 +219,33 @@ public class AI_Client : MonoBehaviour
         ManageNewState((int)currentState);
     }
 
-    private void ExitShop()
+    private IEnumerator MoveAndExit()
     {
-        if (OnClientExit != null)
+        float moveDuration = 2f;
+        float moveDistance = 8f;
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+        Vector3 exitTargetPosition = startingPosition + Vector3.right * moveDistance;
+
+        while (elapsedTime < moveDuration)
         {
-            OnClientExit(this);
+            transform.position = Vector3.Lerp(startingPosition, exitTargetPosition, EaseInOutQuad(elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        transform.position = exitTargetPosition;
+
+        EmptyPlace targetPoint = targetPosition.GetComponent<EmptyPlace>();
+        if (targetPoint != null)
+        {
+            targetPoint.emptyPlace = true;
+        }
+
+        OnClientExit?.Invoke(this);
+
+        animator.SetBool("isOpen", false);
         Destroy(gameObject, destroyDelay);
-        FindAvailablePosition(1);
     }
 
     public int GetClientState()

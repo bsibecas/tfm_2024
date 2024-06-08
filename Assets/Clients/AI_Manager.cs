@@ -70,10 +70,12 @@ public class AI_Manager : MonoBehaviour
 }
 */
 
+/*
+
 public class ClientManager : MonoBehaviour
 {
     [SerializeField] private GameObject clientPrefab;
-    [SerializeField] private int maxClients = 2;
+    [SerializeField] private int maxClients = 1;
     [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private Transform spawnPoints;
 
@@ -101,7 +103,7 @@ public class ClientManager : MonoBehaviour
     {
         GameObject newClient = Instantiate(clientPrefab, spawnPoints.position, Quaternion.identity);
         AI_Client clientScript = newClient.GetComponent<AI_Client>();
-        clientScript.OnClientExit += HandleClientExit;
+    //    clientScript.OnClientExit += HandleClientExit;
         activeClients.Add(clientScript);
     }
 
@@ -109,4 +111,60 @@ public class ClientManager : MonoBehaviour
     {
         activeClients.Remove(client);
     }
+}*/
+
+public class ClientManager : MonoBehaviour
+{
+    [SerializeField] private GameObject clientPrefab;
+    [SerializeField] private float spawnInterval = 5f;
+    [SerializeField] private Transform spawnPoints;
+
+    private AI_Client activeClient;
+
+    private void Start()
+    {
+        StartCoroutine(CheckAndSpawnClient());
+    }
+
+    private IEnumerator CheckAndSpawnClient()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnInterval);
+
+            if (activeClient == null)
+            {
+                SpawnClient();
+            }
+        }
+    }
+
+    private void SpawnClient()
+    {
+        if (clientPrefab != null && spawnPoints != null)
+        {
+            GameObject newClient = Instantiate(clientPrefab, spawnPoints.position, Quaternion.identity);
+            AI_Client clientScript = newClient.GetComponent<AI_Client>();
+            clientScript.OnClientExit += HandleClientExit;
+            activeClient = clientScript;
+            GameManager.clients++;
+        }
+        else
+        {
+            Debug.LogWarning("Client prefab or spawn points are not assigned.");
+        }
+    }
+
+    private void HandleClientExit(AI_Client client)
+    {
+        if (client != null)
+        {
+            client.OnClientExit -= HandleClientExit;
+            if (client == activeClient)
+            {
+                activeClient = null;
+            }
+        }
+    }
 }
+

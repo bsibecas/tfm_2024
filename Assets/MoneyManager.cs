@@ -20,7 +20,7 @@ public class MoneyManager : MonoBehaviour
         UpdateMoneyText();
     }
 
-    private void UpdateMoneyText()
+    public void UpdateMoneyText()
     {
         if (playerMoneyText != null)
         {

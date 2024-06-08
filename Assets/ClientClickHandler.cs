@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ClientClickHandler : MonoBehaviour, IDropHandler
+public class ClientClickHandler : MonoBehaviour
 {
     public GenerateRandomTasks clientTasks;
     public Transform[] emptyPlaces;
@@ -12,6 +12,69 @@ public class ClientClickHandler : MonoBehaviour, IDropHandler
     public Animator animator;
 
     private int actualTask = 0;
+    private GameObject[] instantiatedItems;
+
+    void Awake()
+    {
+        AssignPlayerTransform();
+        AssignEmptyPlaces();
+        AssignAnimator();
+        AssignTaskPriceTexts();
+    }
+
+    void AssignPlayerTransform()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Player GameObject not found. Ensure it is tagged 'Player'.");
+        }
+    }
+
+    void AssignEmptyPlaces()
+    {
+        GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyPlaces");
+        emptyPlaces = new Transform[emptyPlaceObjects.Length];
+        for (int i = 0; i < emptyPlaceObjects.Length; i++)
+        {
+            emptyPlaces[i] = emptyPlaceObjects[emptyPlaceObjects.Length - 1 - i].transform;
+        }
+    }
+
+    void AssignAnimator()
+    {
+        GameObject animatorObject = GameObject.FindWithTag("TaskAnimator");
+        if (animatorObject != null)
+        {
+            animator = animatorObject.GetComponent<Animator>();
+            if (animator == null)
+            {
+                Debug.LogWarning("Animator component not found on the GameObject with tag 'ClientAnimator'.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("GameObject with tag 'ClientAnimator' not found.");
+        }
+    }
+
+    void AssignTaskPriceTexts()
+    {
+        GameObject taskPriceParent = GameObject.FindWithTag("TaskPriceParent");
+        if (taskPriceParent != null)
+        {
+            taskPrice = taskPriceParent.GetComponentsInChildren<TMP_Text>();
+        }
+        else
+        {
+            Debug.LogWarning("Task price parent GameObject not found. Ensure it is tagged 'TaskPriceParent'.");
+        }
+    }
+
 
     void Update()
     {
@@ -41,27 +104,30 @@ public class ClientClickHandler : MonoBehaviour, IDropHandler
         if (clientTasks != null)
         {
             GameObject[] orderedItems = clientTasks.GetOrderList();
+            instantiatedItems = new GameObject[orderedItems.Length];
+
             for (actualTask = 0; orderedItems != null && actualTask < orderedItems.Length; actualTask++)
             {
                 GameObject orderedItem = orderedItems[actualTask];
                 if (orderedItem != null)
                 {
-                    ReplaceEmptySlotWithItem(orderedItem, actualTask);
+                    instantiatedItems[actualTask] = ReplaceEmptySlotWithItem(orderedItem, actualTask);
                 }
             }
             animator.SetBool("isOpen", true);
         }
     }
 
-    private void ReplaceEmptySlotWithItem(GameObject orderedItem, int index)
+    private GameObject ReplaceEmptySlotWithItem(GameObject orderedItem, int index)
     {
+        GameObject newItem = null;
+
         if (index < emptyPlaces.Length)
         {
             Transform emptySlot = emptyPlaces[index];
             if (emptySlot != null)
             {
-                GameObject newItem = Instantiate(orderedItem, emptySlot.position, Quaternion.identity, emptySlot.parent);
-                newItem.transform.SetParent(emptySlot.parent, false);
+                newItem = Instantiate(orderedItem, emptySlot.position, Quaternion.identity, emptySlot.parent);
 
                 Item itemComponent = newItem.GetComponent<Item>();
                 if (itemComponent != null)
@@ -71,44 +137,29 @@ public class ClientClickHandler : MonoBehaviour, IDropHandler
                 }
             }
         }
+        return newItem;
     }
 
-    // Implement the IDropHandler interface method
-    public void OnDrop(PointerEventData eventData)
+    void OnDestroy()
     {
-        // Check if the dropped item matches the current task
-        if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<Item>() != null)
+        if (animator != null)
         {
-            Item droppedItem = eventData.pointerDrag.GetComponent<Item>();
-            GameObject[] orderedItems = clientTasks.GetOrderList();
-
-            if (actualTask < orderedItems.Length && orderedItems[actualTask] == eventData.pointerDrag.gameObject)
+            animator.SetBool("isOpen", false);
+        }
+        if (instantiatedItems != null)
+        {
+            foreach (GameObject item in instantiatedItems)
             {
-                // Mark the task as done
-                Debug.Log("Task " + actualTask + " is marked as done.");
-                actualTask++;
-
-                // Play the client's animation
-                animator.SetBool("isOpen", true);
-
-                // Update the UI to reflect the completed task
-                UpdateTaskUI();
+                if (item != null)
+                {
+                    Destroy(item);
+                }
             }
         }
+        for (int i = 0; i < taskPrice.Length; i++)
+        {
+            taskPrice[i].text = "";
+        }
     }
 
-    private void UpdateTaskUI()
-    {
-        if (actualTask < emptyPlaces.Length && actualTask < taskPrice.Length)
-        {
-            // Update the task UI to indicate the completed task
-            Debug.Log("Updating task UI for task " + actualTask);
-            Destroy(emptyPlaces[actualTask].gameObject); // Remove the task placeholder
-            taskPrice[actualTask].text = "Done"; // Update task price text
-        }
-        else
-        {
-            Debug.LogWarning("No more tasks or UI elements to update.");
-        }
-    }
 }

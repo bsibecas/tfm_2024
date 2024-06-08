@@ -7,6 +7,14 @@ TagManager:
   - BeltItem
   - InventoryCanvas
   - CraftingTable
+  - Oven
+  - Puddle
+  - Trash
+  - ClientTargetPoints
+  - Client
+  - EmptyPlaces
+  - TaskAnimator
+  - TaskPriceParent
   layers:
   - Default
   - TransparentFX

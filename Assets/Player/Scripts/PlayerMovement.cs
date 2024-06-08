@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRegenRate;
     public float maxStamina;
     public float staminaCostPerSecond;
+    public float slipDuration = 0.6f;
 
+    private float originalSpeed;
+    private float originalSprintSpeed;
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private bool isSprinting;
@@ -25,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentStamina = maxStamina;
         UpdateStaminaBar();
+        originalSpeed = moveSpeed;
+        originalSprintSpeed = sprintSpeed;
     }
 
     private void Update()
@@ -93,5 +98,32 @@ public class PlayerMovement : MonoBehaviour
         staminaBar.fillAmount = currentStamina / maxStamina;
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Puddle"))
+        {
+            StartCoroutine(SlipOff(3f));
+        }
+        else if (other.CompareTag("Trash"))
+        {
+            StartCoroutine(SlipOff(0.3f));
+        }
+    }
+
+    private IEnumerator SlipOff(float speedModif)
+    {
+        if (isSprinting == true)
+        {
+            sprintSpeed = originalSprintSpeed * speedModif;
+        }
+        else
+        {
+            moveSpeed = originalSpeed * speedModif;
+        }
+        yield return new WaitForSeconds(slipDuration);
+        moveSpeed = originalSpeed;
+        sprintSpeed = originalSprintSpeed;
+    }
+
+
 }
