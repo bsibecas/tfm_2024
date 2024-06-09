@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GiveClientOrder : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class GiveClientOrder : MonoBehaviour
     public KeyCode interactionKey = KeyCode.E;
     public Inventory inventory;
     public Transform[] emptyPlaces;
-    public GameObject check;
     public MoneyManager moneyManager;
     public TMP_Text deliverIndication;
 
@@ -21,7 +21,7 @@ public class GiveClientOrder : MonoBehaviour
 
     void AssignEmptyPlaces()
     {
-        GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyPlaces");
+        GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyCheck");
         emptyPlaces = new Transform[emptyPlaceObjects.Length];
         for (int i = 0; i < emptyPlaceObjects.Length; i++)
         {
@@ -91,9 +91,12 @@ public class GiveClientOrder : MonoBehaviour
                     {
                         correctTask = true;
                         Transform emptySlot = emptyPlaces[i];
+                        Image checkImage = emptySlot.GetComponentInChildren<Image>();
                         if (emptySlot != null)
                         {
-                            Instantiate(check, emptySlot.position, Quaternion.identity, emptySlot.parent);
+                            Color color = checkImage.color;
+                            color.a = 1f;
+                            checkImage.color = color;
                         }
                         findedTask = i;
                         moneyManager.AddMoney(orderedItems[i].GetComponent<Item>().price);
@@ -104,7 +107,7 @@ public class GiveClientOrder : MonoBehaviour
             }
             if (correctTask == false)
             {
-                GameManager.playerMoney = GameManager.playerMoney - orderedItems[findedTask].GetComponent<Item>().price;
+                GameManager.playerMoney = GameManager.playerMoney - (orderedItems[findedTask].GetComponent<Item>().price/2);
                 moneyManager.UpdateMoneyText();
             }
 

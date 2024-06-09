@@ -4,6 +4,7 @@ public class EventManager : MonoBehaviour
 {
     public ObstacleSpawner puddleSpawner;
     public ObstacleSpawner trashSpawner;
+    float randomValue = 0;
 
     private void Start()
     {
@@ -12,21 +13,28 @@ public class EventManager : MonoBehaviour
 
     public void TriggerEvent()
     {
-        float randomValue = Random.value;
 
-        if (randomValue <= 0.2f)
+        if (GameManager.days > 2)
         {
-            puddleSpawner.TriggerObstacleEvent();
-            Debug.Log("Puddle event triggered!");
-        }
-        else if (randomValue <= 0.5f)
+            randomValue = Random.value;
+
+            if (randomValue <= 0.2f)
+            {
+                trashSpawner.TriggerObstacleEvent();
+            }
+        } else if (GameManager.days > 4)
         {
-            trashSpawner.TriggerObstacleEvent();
-            Debug.Log("Trash event triggered!");
+            randomValue = Random.value;
+
+            if (randomValue <= 0.3f)
+            {
+                trashSpawner.TriggerObstacleEvent();
+            } else if (randomValue >= 0.9f)
+            {
+                puddleSpawner.TriggerObstacleEvent();
+
+            }
         }
-        else
-        {
-            Debug.Log("No event triggered.");
-        }
+       
     }
 }
