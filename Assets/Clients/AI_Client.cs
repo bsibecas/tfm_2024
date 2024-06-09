@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AI_Client : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class AI_Client : MonoBehaviour
     [SerializeField] private float destroyDelay = 4f;
     [SerializeField] private GameObject rageDisplayer;
     [SerializeField] private GenerateRandomTasks clientTasks;
+    [SerializeField] private  Image[] CheckImages;
+
 
     private ClientState currentState;
     private Material rageMaterial;
@@ -52,6 +55,17 @@ public class AI_Client : MonoBehaviour
         else
         {
             Debug.LogWarning("GameObject with tag 'TaskAnimator' not found.");
+        }
+        AssignCheckImages();
+    }
+
+    void AssignCheckImages()
+    {
+        GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyCheck");
+        CheckImages = new Image[emptyPlaceObjects.Length];
+        for (int i = 0; i < emptyPlaceObjects.Length; i++)
+        {
+            CheckImages[i] = emptyPlaceObjects[emptyPlaceObjects.Length - 1 - i].GetComponent<Image>();
         }
     }
 
@@ -245,6 +259,12 @@ public class AI_Client : MonoBehaviour
         OnClientExit?.Invoke(this);
 
         animator.SetBool("isOpen", false);
+        for (int i = 0; i < CheckImages.Length; i++)
+        {
+                Color color = CheckImages[i].color;
+                color.a = 0f;
+                CheckImages[i].color = color;
+        }
         Destroy(gameObject, destroyDelay);
     }
 
