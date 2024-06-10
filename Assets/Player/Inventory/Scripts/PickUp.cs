@@ -7,6 +7,13 @@ public class PickUp : MonoBehaviour
     private Inventory inventory;
     public GameObject itemButton;
     public float pickupRange = 1.5f;
+    AudioManager audioManager;
+
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
 
     private void Start()
@@ -53,6 +60,7 @@ public class PickUp : MonoBehaviour
             {
                 inventory.isFull[i] = true;
                 Instantiate(itemButton, inventory.slots[i].transform, false);
+                audioManager.PlaySFX(audioManager.pickUpObject);
                 Destroy(gameObject);
                 break;
             }

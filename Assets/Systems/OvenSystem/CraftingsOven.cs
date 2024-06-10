@@ -24,6 +24,13 @@ public class CraftingsOven : MonoBehaviour
     public Slider slider;
 
     private int recipeNumber;
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
 
     private void Update()
     {
@@ -96,6 +103,8 @@ public class CraftingsOven : MonoBehaviour
     {
         isCooking = false;
         Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+        audioManager.PlaySFX(audioManager.finishedCooking);
+
         //Item newResultItem = Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
         //resultSlot.item = newResultItem.GetComponent<Item>();
 

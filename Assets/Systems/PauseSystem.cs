@@ -15,6 +15,20 @@ public class PauseSystem : MonoBehaviour
         pauseButton.SetActive(true);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
+
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+        ManagePause();
+    }
+
     public void SetIsPaused(bool _isPaused)
     {
         isPaused = _isPaused;
