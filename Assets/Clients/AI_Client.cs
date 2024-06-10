@@ -278,12 +278,11 @@ public class AI_Client : MonoBehaviour
 
     private void DestroyTaskAnimations()
     {
-        foreach (Transform child in transform)
+        GameObject[] orderItems = GameObject.FindGameObjectsWithTag("orderItem");
+
+        foreach (GameObject item in orderItems)
         {
-            if (child.CompareTag("TaskAnimator") && child.GetComponent<Item>() != null)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(item);
         }
     }
 
