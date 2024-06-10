@@ -18,6 +18,7 @@ TagManager:
   - EmptyCheck
   - Boss
   - Audio
+  - orderItem
   layers:
   - Default
   - TransparentFX

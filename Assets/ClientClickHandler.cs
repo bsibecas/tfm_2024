@@ -113,6 +113,7 @@ public class ClientClickHandler : MonoBehaviour
                 {
                     GameObject instantiatedItem = ReplaceEmptySlotWithItem(orderedItem, actualTask);
                     Destroy(instantiatedItem.GetComponent<DragAndDrop>());
+                    instantiatedItem.tag = "orderItem";
                     instantiatedItems[actualTask] = instantiatedItem;
                 }
             }
