@@ -10,11 +10,14 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text dialogueText;
     private Queue<string> sentences;
 
+    public TimeSystem timeSystem;
+
     public Animator animator;
 
     void Start()
     {
         sentences = new Queue<string>();
+        timeSystem = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimeSystem>();
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -54,5 +57,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
+        timeSystem.StatusTimeChange(true);
+    
     }
 }

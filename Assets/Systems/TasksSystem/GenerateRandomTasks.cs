@@ -11,7 +11,7 @@ public class GenerateRandomTasks : MonoBehaviour
     public int numberOfImagesToSpawn = 3;
     public ItemSlot orderSlot;
     public GameObject[] orderList;
-    float spacingY = 160f;
+    float spacingY = 120f;
     public float destroyDelay = 2f;
     public GameObject check;
     public int tasksCompleted = 0;
@@ -31,12 +31,13 @@ public class GenerateRandomTasks : MonoBehaviour
             return;
         }
 
-        Vector3 initialPosition = new Vector3(-145f, 190f, 0f);
+        Vector3 initialPosition = new Vector3(845f, 190f, 0f);
         orderList = new GameObject[numberOfImagesToSpawn];
 
         for (int i = 0; i < numberOfImagesToSpawn; i++)
         {
             GameObject randomImage = Instantiate(imagesToSpawn[Random.Range(0, imagesToSpawn.Length - 1)], Vector3.zero, Quaternion.identity, canvas.transform);
+
             Destroy(randomImage.GetComponent<DragAndDrop>());
 
             randomImage.transform.localPosition = initialPosition - new Vector3(0f, i * spacingY + 5, 0f);
@@ -101,5 +102,4 @@ public class GenerateRandomTasks : MonoBehaviour
     {
         return numberOfImagesToSpawn;
     }
-
 }

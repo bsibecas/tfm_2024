@@ -7,6 +7,8 @@ TagManager:
   - BeltItem
   - InventoryCanvas
   - CraftingTable
+  - Oven
+  - Timer
   layers:
   - Default
   - TransparentFX

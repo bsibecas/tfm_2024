@@ -8,7 +8,6 @@ public class CraftingsOven : MonoBehaviour
     public float castingTime;
     public float MaximumCastingTime = 3f;
     public bool activatedTime = false;
-
     public Image customCursor;
 
     public GameObject[] craftingSlotsOven;
@@ -27,6 +26,7 @@ public class CraftingsOven : MonoBehaviour
 
     private void Update()
     {
+
         CheckForCreatedRecipes();
         if (isCooking)
         {

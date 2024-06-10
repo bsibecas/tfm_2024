@@ -8,7 +8,6 @@ public class TimeSystem : MonoBehaviour
 {
     private float castingTime;
     private bool activatedTime = false;
-
     public float MaximumCastingTime = 60f;
     public int minuts,seconds;
     public TextMeshProUGUI textoTimer;
@@ -34,7 +33,7 @@ public class TimeSystem : MonoBehaviour
         minuts = (int)(castingTime / 60f);
         seconds = (int)(castingTime - minuts * 60f);   
         textoTimer.text = "" + string.Format("{0}:{1:00}", minuts,seconds);
-
+    
         if(castingTime >=0)
         {
             slider.value = castingTime;
@@ -46,7 +45,7 @@ public class TimeSystem : MonoBehaviour
         }
     }
 
-    private void StatusTimeChange(bool estado)
+    public void StatusTimeChange(bool estado)
     {
         activatedTime = estado;
     }
@@ -55,7 +54,6 @@ public class TimeSystem : MonoBehaviour
     {
         castingTime = MaximumCastingTime;
         slider.maxValue = MaximumCastingTime;
-        StatusTimeChange(true);
     }
 
     public void DeactiveTime()
@@ -75,5 +73,4 @@ public class TimeSystem : MonoBehaviour
             Canvas.SetActive(true);
         }
     }
-
 }

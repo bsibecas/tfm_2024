@@ -9,23 +9,23 @@ public class OpenTasksBoard : MonoBehaviour
     public Transform playerTransform;
     public float distanceThreshold = 2.5f;
 
-    void CheckMouseClick()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+     void CheckMouseClick()
+     {
+         if (Input.GetMouseButtonDown(0))
+         {
+             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
-            {
+             if (hit.collider != null && hit.collider.gameObject == gameObject)
+             {
                 float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
 
-                if (distanceToPlayer <= pickupRange)
-                {
-                    ShowTasksCanvas();
-                }
-            }
-        }
-    }
+                 if (distanceToPlayer <= pickupRange)
+                 {
+                     ShowTasksCanvas();
+                 }
+             }
+         }
+     }
 
     void Update()
     {
