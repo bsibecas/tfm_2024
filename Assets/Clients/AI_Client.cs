@@ -250,10 +250,14 @@ public class AI_Client : MonoBehaviour
 
         transform.position = exitTargetPosition;
 
-        EmptyPlace targetPoint = targetPosition.GetComponent<EmptyPlace>();
-        if (targetPoint != null)
+        // Ensure targetPosition is not null before accessing its component
+        if (targetPosition != null)
         {
-            targetPoint.emptyPlace = true;
+            EmptyPlace targetPoint = targetPosition.GetComponent<EmptyPlace>();
+            if (targetPoint != null)
+            {
+                targetPoint.emptyPlace = true;
+            }
         }
 
         OnClientExit?.Invoke(this);
@@ -261,12 +265,28 @@ public class AI_Client : MonoBehaviour
         animator.SetBool("isOpen", false);
         for (int i = 0; i < CheckImages.Length; i++)
         {
-                Color color = CheckImages[i].color;
-                color.a = 0f;
-                CheckImages[i].color = color;
+            Color color = CheckImages[i].color;
+            color.a = 0f;
+            CheckImages[i].color = color;
         }
-        Destroy(gameObject, destroyDelay);
+
+        DestroyTaskAnimations();
+
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(gameObject);
     }
+
+    private void DestroyTaskAnimations()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("TaskAnimator") && child.GetComponent<Item>() != null)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
 
     public int GetClientState()
     {
