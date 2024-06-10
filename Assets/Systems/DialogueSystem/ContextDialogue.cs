@@ -8,9 +8,12 @@ public class ContextDialogue : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return null;
-        yield return new WaitForSeconds(0.1f);
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (GameManager.days == 0)
+        {
+            yield return null;
+            yield return new WaitForSeconds(0.1f);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
     }
 
 }

@@ -7,6 +7,13 @@ public class MoneyManager : MonoBehaviour
 {
     public TMP_Text playerMoneyText;
     public TMP_Text shopMoneyText;
+    AudioManager audioManager;
+
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
@@ -17,6 +24,7 @@ public class MoneyManager : MonoBehaviour
     {
         GameManager.playerMoney += Mathf.RoundToInt(itemPrice * 0.20f);
         GameManager.shopMoney += itemPrice - Mathf.RoundToInt(itemPrice * 0.20f);
+        audioManager.PlaySFX(audioManager.money);
         UpdateMoneyText();
     }
 

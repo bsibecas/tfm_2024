@@ -12,11 +12,13 @@ public class GiveClientOrder : MonoBehaviour
     public Transform[] emptyPlaces;
     public MoneyManager moneyManager;
     public TMP_Text deliverIndication;
+    AudioManager audioManager;
 
 
     private void Awake()
     {
         AssignEmptyPlaces();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     void AssignEmptyPlaces()
@@ -45,6 +47,7 @@ public class GiveClientOrder : MonoBehaviour
                 isClientNearby = true;
                 if (Input.GetKeyDown(interactionKey))
                 {
+                    audioManager.PlaySFX(audioManager.deliverOrder);
                     GenerateRandomTasks clientTasks = collider.GetComponent<GenerateRandomTasks>();
                     if (clientTasks != null)
                     {
@@ -107,7 +110,7 @@ public class GiveClientOrder : MonoBehaviour
             }
             if (correctTask == false)
             {
-                GameManager.playerMoney = GameManager.playerMoney - (orderedItems[findedTask].GetComponent<Item>().price/2);
+                GameManager.playerMoney = GameManager.playerMoney - Mathf.RoundToInt(firstItem.GetComponent<Item>().price/2);
                 moneyManager.UpdateMoneyText();
             }
 
