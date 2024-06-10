@@ -126,7 +126,7 @@ public class GiveClientOrder : MonoBehaviour
 
             if (allTasksCompleted)
             {
-                GameManager.clients++;
+                //GameManager.clients++;
             }
 
             Destroy(firstItem);

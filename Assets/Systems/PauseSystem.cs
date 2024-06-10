@@ -8,6 +8,9 @@ public class PauseSystem : MonoBehaviour
     bool isPaused = false;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject craftingTableInterface;
+    [SerializeField] GameObject ovenInterface;
+
 
     private void Awake()
     {
@@ -17,7 +20,7 @@ public class PauseSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !craftingTableInterface.activeSelf && !ovenInterface.activeSelf)
         {
             TogglePause();
         }

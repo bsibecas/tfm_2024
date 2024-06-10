@@ -111,7 +111,9 @@ public class ClientClickHandler : MonoBehaviour
                 GameObject orderedItem = orderedItems[actualTask];
                 if (orderedItem != null)
                 {
-                    instantiatedItems[actualTask] = ReplaceEmptySlotWithItem(orderedItem, actualTask);
+                    GameObject instantiatedItem = ReplaceEmptySlotWithItem(orderedItem, actualTask);
+                    Destroy(instantiatedItem.GetComponent<DragAndDrop>());
+                    instantiatedItems[actualTask] = instantiatedItem;
                 }
             }
             animator.SetBool("isOpen", true);
