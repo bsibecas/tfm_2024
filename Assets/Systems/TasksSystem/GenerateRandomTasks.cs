@@ -20,7 +20,7 @@ public class GenerateRandomTasks : MonoBehaviour
 
         for (int i = 0; i < numberOfTasks; i++)
         {
-            GameObject randomImage = imagesToSpawn[Random.Range(0, imagesToSpawn.Length - 1)];
+            GameObject randomImage = imagesToSpawn[Random.Range(0, imagesToSpawn.Length)];
             orderList[i] = randomImage;
         }
 

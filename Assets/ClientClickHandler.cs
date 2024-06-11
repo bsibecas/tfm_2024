@@ -38,7 +38,6 @@ public class ClientClickHandler : MonoBehaviour
     void AssignEmptyPlaces()
     {
         GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyPlaces");
-        // Sort the array by the x position of the GameObjects
         System.Array.Sort(emptyPlaceObjects, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
         emptyPlaces = new Transform[emptyPlaceObjects.Length];
