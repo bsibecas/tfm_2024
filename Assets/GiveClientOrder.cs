@@ -25,11 +25,17 @@ public class GiveClientOrder : MonoBehaviour
     {
         GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyCheck");
         emptyPlaces = new Transform[emptyPlaceObjects.Length];
+
+        // Sort the array by the x position of the GameObjects
+        System.Array.Sort(emptyPlaceObjects, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
+
+        // Assign sorted objects to emptyPlaces array
         for (int i = 0; i < emptyPlaceObjects.Length; i++)
         {
-            emptyPlaces[i] = emptyPlaceObjects[emptyPlaceObjects.Length - 1 - i].transform;
+            emptyPlaces[i] = emptyPlaceObjects[i].transform;
         }
     }
+
 
     void Update()
     {
