@@ -53,7 +53,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 }
 */
 
-
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
@@ -64,7 +63,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private void Awake()
     {
-        // You can either set the canvas directly if you have multiple Canvases, or find it dynamically
         canvas = GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         rectTransform = GetComponent<RectTransform>();
@@ -77,7 +75,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = .6f;
         canvasGroup.blocksRaycasts = false;
 
-        // Find the DragCanvas and move this object to it
         Canvas dragCanvas = GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<Canvas>();
         rectTransform.SetParent(dragCanvas.transform, true);
     }
@@ -91,7 +88,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        //rectTransform.SetParent(originalParent, true);
 
         if (!eventData.pointerEnter || !eventData.pointerEnter.GetComponent<ItemSlot>() || eventData.pointerEnter.GetComponent<OnlyDragSlot>())
         {
