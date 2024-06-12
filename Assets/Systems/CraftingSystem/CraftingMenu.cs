@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CraftingMenu : MonoBehaviour
 {
-    public GameObject craftingCanvas;
+    public GameObject craftingInterface;
     public float pickupRange = 1.5f;
     public Transform playerTransform;
     public float distanceThreshold = 2.5f;
@@ -19,7 +19,7 @@ public class CraftingMenu : MonoBehaviour
 
                 if (distanceToPlayer <= pickupRange)
                 {
-                    ShowCraftingCanvas();
+                    ShowCraftingInterface();
                 }
             }
         }
@@ -31,27 +31,23 @@ public class CraftingMenu : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
         if (distanceToPlayer > distanceThreshold)
         {
-            HideCraftingCanvas();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            HideCraftingCanvas();
+            HideCraftingInterface();
         }
     }
 
-    public void ShowCraftingCanvas()
+    public void ShowCraftingInterface()
     {
-        if (craftingCanvas != null)
+        if (craftingInterface != null)
         {
-            craftingCanvas.SetActive(true);
+            craftingInterface.SetActive(true);
         }
     }
 
-    public void HideCraftingCanvas()
+    public void HideCraftingInterface()
     {
-        if (craftingCanvas != null)
+        if (craftingInterface != null)
         {
-            craftingCanvas.SetActive(false);
+            craftingInterface.SetActive(false);
         }
     }
 }

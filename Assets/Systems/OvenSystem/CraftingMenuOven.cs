@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CraftingMenuOven : MonoBehaviour
 {
-    public GameObject OvenCanvas;
+    public GameObject furnaceInterface;
     public float pickupRange = 1.5f;
     public Transform playerTransform;
     public float distanceThreshold = 2.5f;
@@ -19,7 +19,7 @@ public class CraftingMenuOven : MonoBehaviour
 
                 if (distanceToPlayer <= pickupRange)
                 {
-                    ShowOvenCanvas();
+                    ShowFurnaceInterface();
                 }
             }
         }
@@ -31,27 +31,23 @@ public class CraftingMenuOven : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
         if (distanceToPlayer > distanceThreshold)
         {
-            HideOvenCanvas();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            HideOvenCanvas();
+            HideFurnaceInterface();
         }
     }
 
-    public void ShowOvenCanvas()
+    public void ShowFurnaceInterface()
     {
-        if (OvenCanvas != null)
+        if (furnaceInterface != null)
         {
-            OvenCanvas.SetActive(true);
+            furnaceInterface.SetActive(true);
         }
     }
 
-    public void HideOvenCanvas()
+    public void HideFurnaceInterface()
     {
-        if (OvenCanvas != null)
+        if (furnaceInterface != null)
         {
-            OvenCanvas.SetActive(false);
+            furnaceInterface.SetActive(false);
         }
     }
 }

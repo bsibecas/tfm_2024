@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
     private bool isSprinting;
     private float currentStamina;
-    private float chargeRate = 10;
+    private float chargeRate = 20;
 
     private Coroutine recharge;
     public Image staminaBar;

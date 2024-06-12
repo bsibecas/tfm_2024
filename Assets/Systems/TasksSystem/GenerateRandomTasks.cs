@@ -13,7 +13,6 @@ public class GenerateRandomTasks : MonoBehaviour
 
     void Start()
     {
-        GameManager.tasksCompleted = 0;
         numberOfTasks = Random.Range(1, numberOfTasks);
 
         orderList = new GameObject[numberOfTasks];
@@ -31,10 +30,6 @@ public class GenerateRandomTasks : MonoBehaviour
         return orderList;
     }
 
-    public int GetTasksCompleted()
-    {
-        return GameManager.tasksCompleted;
-    }
 
     public int GetNumberOfTasks()
     {

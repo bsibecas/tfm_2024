@@ -14,7 +14,6 @@ public class TimeSystem : MonoBehaviour
     public int minuts,seconds;
     public TextMeshProUGUI textoTimer;
     public Slider slider;
-    public GameObject Canvas;
 
     private void Start()
   {
@@ -42,7 +41,14 @@ public class TimeSystem : MonoBehaviour
         }
         if(castingTime <= 0)
         {
-            SceneManager.LoadScene("2-LevelClear");
+            if (GameManager.satisfiedClients < 3)
+            { 
+                SceneManager.LoadScene("3-GameOver");
+            }
+            else
+            {
+                SceneManager.LoadScene("2-LevelClear");
+            }
             StatusTimeChange(false);
         }
     }
@@ -68,13 +74,4 @@ public class TimeSystem : MonoBehaviour
     {
         return castingTime;
     }
-
-    public void ShowTasksCanvas()
-    {
-        if (Canvas != null)
-        {
-            Canvas.SetActive(true);
-        }
-    }
-
 }
