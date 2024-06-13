@@ -40,7 +40,7 @@ public class DisplayStars : MonoBehaviour
                 starTwo = true;
 
             }
-            if (GameManager.playerMoney >= 30)
+            if (GameManager.playerMoney >= 20)
             {
                 if (starTwo == false)
                 {
