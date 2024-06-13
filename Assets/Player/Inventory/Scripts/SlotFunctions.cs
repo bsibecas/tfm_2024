@@ -31,7 +31,13 @@ public class SlotFunctions : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && inventory.isFull[i] != true)
+        GameObject dropTarget = eventData.pointerEnter;
+
+        if (eventData.pointerDrag != null && dropTarget != null && dropTarget.CompareTag("bin"))
+        {
+            Destroy(eventData.pointerDrag);
+        }
+        else if (eventData.pointerDrag != null && inventory.isFull[i] != true)
         {
             RectTransform itemRectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
             RectTransform slotRectTransform = GetComponent<RectTransform>();

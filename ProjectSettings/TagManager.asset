@@ -19,6 +19,7 @@ TagManager:
   - Boss
   - Audio
   - orderItem
+  - bin
   layers:
   - Default
   - TransparentFX

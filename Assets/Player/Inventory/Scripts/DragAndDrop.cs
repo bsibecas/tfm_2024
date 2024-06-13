@@ -52,7 +52,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
 }
 */
-
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
@@ -89,9 +88,13 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
+        //rectTransform.SetParent(originalParent, true);
+
+
         if (!eventData.pointerEnter || !eventData.pointerEnter.GetComponent<ItemSlot>() || eventData.pointerEnter.GetComponent<OnlyDragSlot>())
         {
             rectTransform.anchoredPosition = originalPosition;
+            //Debug.Log("AYY");
         }
     }
 
