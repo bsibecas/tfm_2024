@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
 public class GiveClientOrder : MonoBehaviour
 {
     public float interactionRange = 2.5f;
-    public KeyCode interactionKey = KeyCode.E;
     public Inventory inventory;
     public Transform[] emptyPlaces;
     public MoneyManager moneyManager;
     public TMP_Text deliverIndication;
-    AudioManager audioManager;
+    public GameObject deliveryBag;
 
+    AudioManager audioManager;
 
     private void Awake()
     {
@@ -26,16 +25,12 @@ public class GiveClientOrder : MonoBehaviour
         GameObject[] emptyPlaceObjects = GameObject.FindGameObjectsWithTag("EmptyCheck");
         emptyPlaces = new Transform[emptyPlaceObjects.Length];
 
-        // Sort the array by the x position of the GameObjects
         System.Array.Sort(emptyPlaceObjects, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
-
-        // Assign sorted objects to emptyPlaces array
         for (int i = 0; i < emptyPlaceObjects.Length; i++)
         {
             emptyPlaces[i] = emptyPlaceObjects[i].transform;
         }
     }
-
 
     void Update()
     {
@@ -51,23 +46,11 @@ public class GiveClientOrder : MonoBehaviour
             if (collider.CompareTag("Client"))
             {
                 isClientNearby = true;
-                if (Input.GetKeyDown(interactionKey))
-                {
-                    audioManager.PlaySFX(audioManager.deliverOrder);
-                    GenerateRandomTasks clientTasks = collider.GetComponent<GenerateRandomTasks>();
-                    if (clientTasks != null)
-                    {
-                        HandleClientInteraction(clientTasks);
-                    }
-                }
                 if (deliverIndication != null)
                 {
-                    deliverIndication.text = "Click 'E' to deliver to the client your first inventory slot item";
+                    deliverIndication.text = "Drop an item in the delivery bag to deliver it to the client";
                 }
                 break;
-            } else
-            {
-                isClientNearby = false;
             }
         }
 
@@ -75,68 +58,93 @@ public class GiveClientOrder : MonoBehaviour
         {
             deliverIndication.text = "";
         }
-  
+
+        // Update the visibility of the deliveryBag based on the proximity to the client
+        UpdateDeliveryBagVisibility(isClientNearby);
     }
 
-    private void HandleClientInteraction(GenerateRandomTasks clientTasks)
+    private void UpdateDeliveryBagVisibility(bool isClientNearby)
+    {
+        deliveryBag.SetActive(isClientNearby);
+    }
+
+    public void HandleDroppedItem(GameObject droppedItem)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactionRange);
+        bool isClientNearby = false;
+        GenerateRandomTasks clientTasks = null;
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Client"))
+            {
+                isClientNearby = true;
+                clientTasks = collider.GetComponent<GenerateRandomTasks>();
+                break;
+            }
+        }
+
+        if (isClientNearby && clientTasks != null)
+        {
+            HandleClientInteraction(clientTasks, droppedItem);
+        }
+    }
+
+    private void HandleClientInteraction(GenerateRandomTasks clientTasks, GameObject firstItem)
     {
         bool correctTask = false;
         int findedTask = 0;
         GameObject[] orderedItems = clientTasks.GetOrderList();
         bool allTasksCompleted = false;
 
-        if (inventory.isFull[0] == true)
+        string firstItemName = firstItem.name.Replace("(Clone)", "").Trim();
+
+        for (int i = 0; i < orderedItems.Length; i++)
         {
-            Transform firstItemTransform = inventory.slots[0].transform.GetChild(0);
-            GameObject firstItem = firstItemTransform.gameObject;
-            for (int i = 0; i < orderedItems.Length; i++ )
+            if (orderedItems[i] != null)
             {
-                if (orderedItems[i] != null)
-                {
-                    string orderedItemName = orderedItems[i].name.Replace("(Clone)", "").Trim();
-                    string firstItemName = firstItem.name.Replace("(Clone)", "").Trim();
+                string orderedItemName = orderedItems[i].name.Replace("(Clone)", "").Trim();
 
-                    if (orderedItemName == firstItemName)
+                if (orderedItemName == firstItemName)
+                {
+                    correctTask = true;
+                    Transform emptySlot = emptyPlaces[i];
+                    Image checkImage = emptySlot.GetComponentInChildren<Image>();
+                    if (emptySlot != null)
                     {
-                        correctTask = true;
-                        Transform emptySlot = emptyPlaces[i];
-                        Image checkImage = emptySlot.GetComponentInChildren<Image>();
-                        if (emptySlot != null)
-                        {
-                            Color color = checkImage.color;
-                            color.a = 1f;
-                            checkImage.color = color;
-                        }
-                        findedTask = i;
-                        moneyManager.AddMoney(orderedItems[i].GetComponent<Item>().price);
-                        orderedItems[i] = null;
-                        break;
+                        Color color = checkImage.color;
+                        color.a = 1f;
+                        checkImage.color = color;
                     }
-                }
-            }
-            if (correctTask == false)
-            {
-                GameManager.playerMoney = GameManager.playerMoney - Mathf.RoundToInt(firstItem.GetComponent<Item>().price/2);
-                moneyManager.UpdateMoneyText();
-            }
-
-            allTasksCompleted = true;
-            foreach (GameObject item in orderedItems)
-            {
-                if (item != null)
-                {
-                    allTasksCompleted = false;
+                    findedTask = i;
+                    moneyManager.AddMoney(orderedItems[i].GetComponent<Item>().price);
+                    orderedItems[i] = null;
                     break;
                 }
             }
-
-            if (allTasksCompleted)
-            {
-                //GameManager.clients++;
-                GameManager.satisfiedClients++;
-            }
-
-            Destroy(firstItem);
         }
+
+        if (correctTask == false)
+        {
+            GameManager.playerMoney = GameManager.playerMoney - Mathf.RoundToInt(firstItem.GetComponent<Item>().price / 2);
+            moneyManager.UpdateMoneyText();
+        }
+
+        allTasksCompleted = true;
+        foreach (GameObject item in orderedItems)
+        {
+            if (item != null)
+            {
+                allTasksCompleted = false;
+                break;
+            }
+        }
+
+        if (allTasksCompleted)
+        {
+            GameManager.satisfiedClients++;
+        }
+
+        Destroy(firstItem);
     }
 }

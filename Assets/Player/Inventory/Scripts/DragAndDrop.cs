@@ -51,7 +51,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     }
 
 }
+
 */
+
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
@@ -71,8 +73,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup.alpha = .6f;
+        canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
+
+        originalParent = rectTransform.parent;
+        originalPosition = rectTransform.anchoredPosition;
 
         Canvas dragCanvas = GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<Canvas>();
         rectTransform.SetParent(dragCanvas.transform, true);
@@ -88,15 +93,18 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
 
-        //rectTransform.SetParent(originalParent, true);
-
-
-        if (!eventData.pointerEnter || !eventData.pointerEnter.GetComponent<ItemSlot>() || eventData.pointerEnter.GetComponent<OnlyDragSlot>())
+        if (!eventData.pointerEnter || (!eventData.pointerEnter.GetComponent<SlotFunctions>() && !eventData.pointerEnter.GetComponent<ItemSlot>()) || eventData.pointerEnter.GetComponent<OnlyDragSlot>())
         {
             rectTransform.anchoredPosition = originalPosition;
-            //Debug.Log("AYY");
+            rectTransform.SetParent(originalParent, false);
+            Debug.Log("Returning item to original position");
+        }
+        else
+        {
+            Debug.Log("Item dropped in a valid slot");
         }
     }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {

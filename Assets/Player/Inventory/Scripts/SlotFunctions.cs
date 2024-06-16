@@ -15,9 +15,9 @@ public class SlotFunctions : MonoBehaviour, IDropHandler
 
     private void Update()
     {
-        if (transform.childCount <= 0)
+        if (transform.childCount <= 0 && !CompareTag("bin"))
         {
-            inventory.isFull[i] = false;
+             inventory.isFull[i] = false;
         }
     }
 

@@ -4,7 +4,6 @@ public class Inventory : MonoBehaviour
 {
     public bool[] isFull;
     public GameObject[] slots;
-    public GameObject[] crosses;
 
     private bool isVisible = true;
 
@@ -23,11 +22,6 @@ public class Inventory : MonoBehaviour
         foreach (GameObject slot in slots)
         {
             slot.SetActive(isVisible);
-        }
-
-        foreach (GameObject cross in crosses)
-        {
-            cross.SetActive(isVisible);
         }
     }
 }

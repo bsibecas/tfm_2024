@@ -41,18 +41,24 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag != null)
         {
-            if (craftingSlots != null && index >= 0 && index < craftingSlots.craftingSlots.Length)
+            if (CompareTag("CraftingTableSlot"))
             {
-                if (!craftingSlots.isFull[index])
+                if (craftingSlots != null && index >= 0 && index < craftingSlots.craftingSlots.Length)
                 {
-                    HandleCraftingTableDrop(eventData);
+                    if (!craftingSlots.isFull[index])
+                    {
+                        HandleCraftingTableDrop(eventData);
+                    }
                 }
             }
-            if (craftingSlotsOven != null && index >= 0 && index < craftingSlotsOven.craftingSlotsOven.Length)
+            else if (CompareTag("FurnaceSlot"))
             {
-                if (!craftingSlotsOven.isFull[index])
+                if (craftingSlotsOven != null && index >= 0 && index < craftingSlotsOven.craftingSlotsOven.Length)
                 {
-                    HandleOvenDrop(eventData);
+                    if (!craftingSlotsOven.isFull[index])
+                    {
+                        HandleOvenDrop(eventData);
+                    }
                 }
             }
         }
