@@ -23,16 +23,18 @@ public class DisplayStars : MonoBehaviour
         VerifyStars();
     }
 
+   
+
     private void VerifyStars()
     {
         bool starTwo = false;
-        if (GameManager.satisfiedClients >= 3)
+        if (GameManager.satisfiedClients >= GameManager.minClients - 1)
         {
             Color colorStarOne = childImages[0].color;
             colorStarOne.a = 1f;
             childImages[0].color = colorStarOne;
 
-            if (GameManager.clients == (GameManager.satisfiedClients - 1))
+            if ((GameManager.clients - 1) == GameManager.satisfiedClients)
             {
                 Color colorStarTwo = childImages[1].color;
                 colorStarTwo.a = 1f;
@@ -40,7 +42,7 @@ public class DisplayStars : MonoBehaviour
                 starTwo = true;
 
             }
-            if (GameManager.playerMoney >= 20)
+            if (GameManager.playerMoney >= GameManager.minPlayerMoney)
             {
                 if (starTwo == false)
                 {

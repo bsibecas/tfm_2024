@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
     private bool isSprinting;
     private float currentStamina;
-    private float chargeRate = 20;
+    private float chargeRate = 35;
 
     private Coroutine recharge;
     public Image staminaBar;
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator RechargeStamina()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         while (currentStamina < maxStamina)
         {
             currentStamina += chargeRate * Time.deltaTime;

@@ -18,6 +18,9 @@ public class SlotFunctions : MonoBehaviour, IDropHandler
         if (transform.childCount <= 0 && !CompareTag("bin"))
         {
              inventory.isFull[i] = false;
+        } else if (transform.childCount > 0)
+        {
+            inventory.isFull[i] = true;
         }
     }
 
@@ -29,7 +32,8 @@ public class SlotFunctions : MonoBehaviour, IDropHandler
         }
     }
 
-    public void OnDrop(PointerEventData eventData)
+    
+    /*public void OnDrop(PointerEventData eventData)
     {
         GameObject dropTarget = eventData.pointerEnter;
 
@@ -46,5 +50,30 @@ public class SlotFunctions : MonoBehaviour, IDropHandler
             itemRectTransform.anchoredPosition = Vector2.zero;
             inventory.isFull[i] = true;
         }
-    }
+    }*/
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameObject draggedItem = eventData.pointerDrag;
+        GameObject dropTarget = eventData.pointerEnter;
+    if (draggedItem != null && !CompareTag("bin"))
+        {
+            RectTransform itemRectTransform = draggedItem.GetComponent<RectTransform>();
+            RectTransform slotRectTransform = GetComponent<RectTransform>();
+
+            if (RectTransformUtility.RectangleContainsScreenPoint(slotRectTransform, Input.mousePosition, null))
+            {
+                if (!inventory.isFull[i])
+                {
+                    itemRectTransform.SetParent(slotRectTransform);
+                    itemRectTransform.anchoredPosition = Vector2.zero;
+                    inventory.isFull[i] = true;
+                }
+            }
+        }
+        else if (dropTarget.CompareTag("bin"))
+        {
+            Destroy(draggedItem);
+        }
+    } 
 }

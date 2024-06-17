@@ -5,21 +5,30 @@ using UnityEngine;
 public class GenerateRandomTasks : MonoBehaviour
 {
     public GameObject[] imagesToSpawn;
-    public int maxNumberOfTasks = 3;
     public int numberOfTasks = 3;
+    public int maxTasks = 3;
+    public int newRecipe = 0;
     public GameObject[] orderList;
 
     public MoneyManager moneyManager;
 
     void Start()
     {
-        numberOfTasks = Random.Range(1, numberOfTasks);
+        if (GameManager.days <= 3)
+        {
+            newRecipe = GameManager.days;
+        } else
+        {
+            newRecipe = 3;
+        }
+        numberOfTasks = Random.Range(1, maxTasks);
 
         orderList = new GameObject[numberOfTasks];
 
         for (int i = 0; i < numberOfTasks; i++)
         {
-            GameObject randomImage = imagesToSpawn[Random.Range(0, imagesToSpawn.Length)];
+            GameObject randomImage = imagesToSpawn[Random.Range(0, (maxTasks + newRecipe))];
+
             orderList[i] = randomImage;
         }
 
@@ -28,12 +37,6 @@ public class GenerateRandomTasks : MonoBehaviour
     public GameObject[] GetOrderList()
     {
         return orderList;
-    }
-
-
-    public int GetNumberOfTasks()
-    {
-        return maxNumberOfTasks;
     }
 
 }

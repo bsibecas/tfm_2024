@@ -7,7 +7,6 @@ public class BossDialogue : MonoBehaviour
 {
     public Dialogue dialogue;
     public float interactionRange = 2.5f;
-    public KeyCode interactionKey = KeyCode.E;
     public TMP_Text interactionBossText;
     private Transform playerTransform;
 
@@ -33,14 +32,14 @@ public class BossDialogue : MonoBehaviour
 
         if (isBossNearby)
         {
-            if (Input.GetKeyDown(interactionKey))
+            if (Input.GetMouseButtonDown(0))
             {
                 StartBossDialogue();
             }
 
             if (interactionBossText != null)
             {
-                interactionBossText.text = "Press 'E' to talk with the boss";
+                interactionBossText.text = "Click left mouse button to talk with the boss";
             }
         }
         else

@@ -152,6 +152,7 @@ MonoBehaviour:
   destroyDelay: 2
   rageDisplayer: {fileID: 8069072591685935387}
   clientTasks: {fileID: 0}
+  CheckImages: []
   animator: {fileID: 0}
 --- !u!114 &655922727118209842
 MonoBehaviour:
@@ -170,8 +171,11 @@ MonoBehaviour:
   - {fileID: 5500194691460039825, guid: db23f5d3780a6423190692a91bd316dd, type: 3}
   - {fileID: 5500194691460039825, guid: 2db7e5ccb9abe4b478b2b59941dbb8f6, type: 3}
   - {fileID: 5500194691460039825, guid: 244f8ee59d0d44092b153b44955f1ea8, type: 3}
-  maxNumberOfTasks: 3
+  - {fileID: 5500194691460039825, guid: 4458602108bf04c45a7254f4a5879963, type: 3}
+  - {fileID: 5500194691460039825, guid: 4458602108bf04c45a7254f4a5879963, type: 3}
+  - {fileID: 5500194691460039825, guid: 4458602108bf04c45a7254f4a5879963, type: 3}
   numberOfTasks: 3
+  newRecipe: 0
   orderList: []
   moneyManager: {fileID: 0}
 --- !u!114 &4452148024584161756

@@ -41,7 +41,7 @@ public class TimeSystem : MonoBehaviour
         }
         if(castingTime <= 0)
         {
-            if (GameManager.satisfiedClients < 3)
+            if (GameManager.satisfiedClients < GameManager.minClients)
             { 
                 SceneManager.LoadScene("3-GameOver");
             }

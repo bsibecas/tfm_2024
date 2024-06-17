@@ -40,7 +40,7 @@ public class Statistics : MonoBehaviour
 
         if (tasksCompletedText != null)
         {
-            tasksCompletedText.text = "Satisfied clients: " + GameManager.satisfiedClients.ToString() + "/" + GameManager.clients.ToString();
+            tasksCompletedText.text = "Satisfied clients: " + GameManager.satisfiedClients.ToString() + "/" + (GameManager.clients - 1).ToString();
         }
     }
 }
