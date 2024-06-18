@@ -97,11 +97,9 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             rectTransform.anchoredPosition = originalPosition;
             rectTransform.SetParent(originalParent, false);
-            Debug.Log("Returning item to original position");
         }
         else
         {
-            Debug.Log("Item dropped in a valid slot");
         }
     }
 

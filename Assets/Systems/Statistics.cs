@@ -38,9 +38,20 @@ public class Statistics : MonoBehaviour
             shopMoneyText.text = "Shop Money: " + GameManager.shopMoney.ToString() + "$";
         }
 
-        if (tasksCompletedText != null)
+        if (GameManager.satisfiedClients > (GameManager.clients - 1))
         {
-            tasksCompletedText.text = "Satisfied clients: " + GameManager.satisfiedClients.ToString() + "/" + (GameManager.clients - 1).ToString();
+            if (tasksCompletedText != null)
+            {
+                tasksCompletedText.text = "Satisfied clients: " + GameManager.satisfiedClients.ToString() + "/" + GameManager.clients.ToString();
+            }
+        } else
+        {
+            if (tasksCompletedText != null)
+            {
+                tasksCompletedText.text = "Satisfied clients: " + GameManager.satisfiedClients.ToString() + "/" + (GameManager.clients - 1).ToString();
+            }
         }
+
+        
     }
 }

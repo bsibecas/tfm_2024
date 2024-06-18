@@ -18,15 +18,15 @@ public class ActivateInLevel : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.days == 1)
+        if (GameManager.days >= 1)
         {
             Recipe.SetActive(true);
         }
-        else if (GameManager.days == 2)
+        else if (GameManager.days >= 2)
         {
             Recipe.SetActive(true);
         }
-        else if (GameManager.days == 3)
+        else if (GameManager.days >= 3)
         {
             Recipe.SetActive(true);
         }

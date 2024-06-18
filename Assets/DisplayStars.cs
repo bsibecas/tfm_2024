@@ -16,7 +16,6 @@ public class DisplayStars : MonoBehaviour
             childImages[i] = rawImages[i];
         }
 
-        Debug.Log("Found " + childImages.Length + " child raw images.");
     }
     private void Update()
     {

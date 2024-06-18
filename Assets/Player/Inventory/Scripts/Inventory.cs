@@ -24,4 +24,16 @@ public class Inventory : MonoBehaviour
             slot.SetActive(isVisible);
         }
     }
+
+    public int FindFirstAvailableSlot()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (!isFull[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

@@ -1,10 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
     public ObstacleSpawner puddleSpawner;
     public ObstacleSpawner trashSpawner;
-    float randomValue = 0;
+    public Dialogue trashDialogue;
+    public Dialogue puddleDialogue;
+
 
     private void Start()
     {
@@ -14,27 +17,29 @@ public class EventManager : MonoBehaviour
     public void TriggerEvent()
     {
 
-        if (GameManager.days > 2)
+        if (GameManager.days == 1)
         {
-            randomValue = Random.value;
-
-            if (randomValue <= 0.2f)
-            {
-                trashSpawner.TriggerObstacleEvent();
-            }
-        } else if (GameManager.days > 4)
-        {
-            randomValue = Random.value;
-
-            if (randomValue <= 0.3f)
-            {
-                trashSpawner.TriggerObstacleEvent();
-            } else if (randomValue >= 0.9f)
-            {
-                puddleSpawner.TriggerObstacleEvent();
-
-            }
+            trashSpawner.TriggerObstacleEvent();
+            StartCoroutine(TrashDialogue());
         }
-       
+        else if (GameManager.days == 3)
+        {
+            puddleSpawner.TriggerObstacleEvent();
+            StartCoroutine(PuddleDialogue());
+        }
+    }
+
+    private IEnumerator TrashDialogue()
+    {
+        yield return null;
+        yield return new WaitForSeconds(0.1f);
+        FindObjectOfType<DialogueManager>().StartDialogue(trashDialogue);
+    }
+
+    private IEnumerator PuddleDialogue()
+    {
+        yield return null;
+        yield return new WaitForSeconds(0.1f);
+        FindObjectOfType<DialogueManager>().StartDialogue(puddleDialogue);
     }
 }

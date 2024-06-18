@@ -28,6 +28,13 @@ public class MoneyManager : MonoBehaviour
         UpdateMoneyText();
     }
 
+    public void SubstractPlayerMoney(int itemPrice)
+    {
+        GameManager.playerMoney = GameManager.playerMoney - itemPrice;
+        audioManager.PlaySFX(audioManager.money);
+        UpdateMoneyText();
+    }
+
     public void UpdateMoneyText()
     {
         if (playerMoneyText != null)

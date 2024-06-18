@@ -5,6 +5,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 {
     public Item item;
     public int index;
+    public Transform resultSlot;
 
     private Craftings craftingSlots;
     private CraftingsOven craftingSlotsOven;
@@ -17,6 +18,10 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     private void Update()
     {
+        if(resultSlot.childCount <= 0)
+        {
+            item = null;
+        }
         if (craftingSlots != null && index >= 0 && index < craftingSlots.craftingSlots.Length)
         {
             if (transform.childCount <= 0)

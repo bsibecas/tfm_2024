@@ -102,12 +102,10 @@ public class CraftingsOven : MonoBehaviour
     private void CookingFinished()
     {
         isCooking = false;
-        Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+        //Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
         audioManager.PlaySFX(audioManager.finishedCooking);
-
-        //Item newResultItem = Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
-        //resultSlot.item = newResultItem.GetComponent<Item>();
-
+        Item newResultItem = Instantiate(recipeResults[recipeNumber], resultSlot.transform, false);
+        resultSlot.item = newResultItem.GetComponent<Item>();
     }
 
     IEnumerator DelayedDestroy(float delay)
