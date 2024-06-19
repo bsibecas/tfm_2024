@@ -35,6 +35,13 @@ public class MoneyManager : MonoBehaviour
         UpdateMoneyText();
     }
 
+    public void SubstractShopMoney(int itemPrice)
+    {
+        GameManager.shopMoney = GameManager.shopMoney - itemPrice;
+        audioManager.PlaySFX(audioManager.money);
+        UpdateMoneyText();
+    }
+
     public void UpdateMoneyText()
     {
         if (playerMoneyText != null)

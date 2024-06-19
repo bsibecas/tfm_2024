@@ -5,32 +5,50 @@ using UnityEngine.UI;
 
 public class CraftingsOven : MonoBehaviour
 {
+    [Header("---------------- Casting Time ----------------")]
     public float castingTime;
     public float MaximumCastingTime = 3f;
     public bool activatedTime = false;
 
-    public Image customCursor;
+    [Header("---------------- UI ----------------")]
+    public Button upgradeButton;
+    public Slider slider;
 
+    [Header("---------------- Slots Info ----------------")]
     public GameObject[] craftingSlotsOven;
-
     public bool[] isFull;
     private bool isCooking = false;
+    public ItemSlot resultSlot;
 
-
+    [Header("---------------- Items & Recipes ----------------")]
     public List<Item> itemList;
     public string[] recipes;
     public Item[] recipeResults;
-    public ItemSlot resultSlot;
-    public Slider slider;
-
     private int recipeNumber;
+
+    [Header("---------------- Money ----------------")]
+    public MoneyManager moneyManager;
+
+    [Header("---------------- Audio ----------------")]
     AudioManager audioManager;
+
 
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        if (GameManager.furnaceUpgraded == true)
+        {
+            MaximumCastingTime = 1.5f;
+            upgradeButton.gameObject.SetActive(false);
+        }
+        else if (GameManager.days >= 2 && GameManager.furnaceUpgraded == false)
+        {
+            upgradeButton.gameObject.SetActive(true);
+        } else
+        {
+            upgradeButton.gameObject.SetActive(false);
+        }
     }
-
 
     private void Update()
     {
@@ -38,6 +56,20 @@ public class CraftingsOven : MonoBehaviour
         if (isCooking)
         {
             CheckTime();
+        }
+        if (GameManager.furnaceUpgraded == true)
+        {
+            MaximumCastingTime = 1.5f;
+            upgradeButton.gameObject.SetActive(false);
+        }
+    }
+
+    public void UpgradeFurnace()
+    {
+        if (GameManager.shopMoney >= 150)
+        {
+            GameManager.furnaceUpgraded = true;
+            moneyManager.SubstractShopMoney(150);
         }
     }
 
