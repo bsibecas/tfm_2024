@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class Craftings : MonoBehaviour
 {
-
+    [Header("---------------- UI ----------------")]
     public Image customCursor;
 
+    [Header("---------------- Slots Info ----------------")]
     public GameObject[] craftingSlots;
     public bool[] isFull;
+    public ItemSlot resultSlot;
 
+    [Header("---------------- Items & Recipes ----------------")]
     public List<Item> itemList;
     public string[] recipes;
     public Item[] recipeResults;
-    public ItemSlot resultSlot;
 
     private void Update()
     {

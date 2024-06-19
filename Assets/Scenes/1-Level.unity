@@ -13730,6 +13730,7 @@ MonoBehaviour:
   - {fileID: 1756908617}
   - {fileID: 276124389}
   isFull: 0000
+  resultSlot: {fileID: 489712732}
   itemList:
   - {fileID: 0}
   - {fileID: 0}
@@ -13749,7 +13750,6 @@ MonoBehaviour:
   - {fileID: 3980732705638311852, guid: 4458602108bf04c45a7254f4a5879963, type: 3}
   - {fileID: 3980732705638311852, guid: b2c317e8037204af0aa9178c794b7648, type: 3}
   - {fileID: 3980732705638311852, guid: 79b849b8be19d47fcad893b3c680701e, type: 3}
-  resultSlot: {fileID: 489712732}
 --- !u!61 &1228364152
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15988,7 +15988,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1496887113}
   - component: {fileID: 1496887114}
-  - component: {fileID: 1496887115}
   m_Layer: 5
   m_Name: MaterialsShop
   m_TagString: Untagged
@@ -16048,26 +16047,6 @@ MonoBehaviour:
   - {fileID: 1132915726}
   moneyManager: {fileID: 1405926678}
   inventory: {fileID: 1958610763}
---- !u!114 &1496887115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496887112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23ebeeaf1a65a4c0c895228ceb3b6d94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materialsShop: {fileID: 1496887112}
-  buttonMaterialsShop: {fileID: 1759767954}
-  materialsShopDialogue:
-    name: Boss
-    sentences:
-    - "Hey, Alex! If you're too useless to keep track of materials, there's a shop
-      for that. Click the cart button to buy what you need. But don\u2019t blow all
-      your money, or you'll regret it."
 --- !u!1 &1499535246
 GameObject:
   m_ObjectHideFlags: 0
@@ -20970,6 +20949,7 @@ GameObject:
   - component: {fileID: 1759767958}
   - component: {fileID: 1759767957}
   - component: {fileID: 1759767956}
+  - component: {fileID: 1759767959}
   m_Layer: 5
   m_Name: MaterialsShopButton
   m_TagString: Untagged
@@ -21090,6 +21070,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759767954}
   m_CullTransparentMesh: 1
+--- !u!114 &1759767959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759767954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ebeeaf1a65a4c0c895228ceb3b6d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialsShop: {fileID: 1496887112}
+  buttonMaterialsShop: {fileID: 1759767954}
+  materialsShopDialogue:
+    name: Boss
+    sentences:
+    - "Hey, Alex! If you're too useless to keep track of materials, there's a shop
+      for that. Click the cart button to buy what you need. But don\u2019t blow all
+      your money, or you'll regret it."
 --- !u!1 &1763204865
 GameObject:
   m_ObjectHideFlags: 0

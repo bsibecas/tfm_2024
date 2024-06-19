@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; // For Button
+using UnityEngine.UI;
 
 public class MaterialsShop : MonoBehaviour
 {
@@ -79,14 +79,6 @@ public class MaterialsShop : MonoBehaviour
                 inventory.isFull[slotIndex] = true;
                 moneyManager.SubstractPlayerMoney(item.price);
             }
-            else
-            {
-                Debug.Log("Inventory is full. Cannot purchase " + item.itemName);
-            }
-        }
-        else
-        {
-            Debug.Log("Not enough money to buy " + item.itemName);
         }
     }
 

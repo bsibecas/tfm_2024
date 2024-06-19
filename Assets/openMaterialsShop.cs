@@ -11,10 +11,6 @@ public class OpenMaterialsShop : MonoBehaviour
     {
         materialsShop.SetActive(false);
         buttonMaterialsShop.SetActive(false);
-    }
-
-    private void Update()
-    {
         ActivateGameObjectBasedOnDays();
     }
 
@@ -35,12 +31,12 @@ public class OpenMaterialsShop : MonoBehaviour
             buttonMaterialsShop.SetActive(true);
             if (GameManager.days == 2)
             {
-                StartCoroutine(MaterialsShopDialogue());
+                StartCoroutine(StartMaterialsShopDialogue());
             }
         }
     }
 
-    private IEnumerator MaterialsShopDialogue()
+    private IEnumerator StartMaterialsShopDialogue()
     {
         yield return null;
         yield return new WaitForSeconds(0.1f);
