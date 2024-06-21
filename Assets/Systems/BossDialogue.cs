@@ -27,16 +27,18 @@ public class BossDialogue : MonoBehaviour
             return;
         }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        bool isBossNearby = distanceToPlayer <= interactionRange;
-
-        if (isBossNearby)
+        float distanceToPlayer = Vector2.Distance(playerTransform.position, transform.position);
+        if (distanceToPlayer <= interactionRange)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                StartBossDialogue();
-            }
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
+                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                {
+                    StartBossDialogue();
+                }
+            }
             if (interactionBossText != null)
             {
                 interactionBossText.text = "Click left mouse button to talk with the boss";
