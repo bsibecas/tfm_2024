@@ -46,7 +46,7 @@ public class MoneyManager : MonoBehaviour
     {
         if (playerMoneyText != null)
         {
-            playerMoneyText.text = "Player Money: $" + GameManager.playerMoney.ToString();
+            playerMoneyText.text = "Salary: $" + GameManager.playerMoney.ToString();
         }
 
         if (shopMoneyText != null)
