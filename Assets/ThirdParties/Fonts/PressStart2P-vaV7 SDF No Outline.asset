@@ -58,11 +58,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: PressStart2P-vaV7 SDF
+  m_Name: PressStart2P-vaV7 SDF No Outline
   m_EditorClassIdentifier: 
-  hashCode: 437394479
+  hashCode: -1721662898
   material: {fileID: 1288105505808786422}
-  materialHashCode: 456190895
+  materialHashCode: 305954734
   m_Version: 1.1.0
   m_SourceFontFileGUID: f4233201ea1113448b5273fa85f294e8
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: f4233201ea1113448b5273fa85f294e8, type: 3}
@@ -2563,7 +2563,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.4
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
