@@ -48,7 +48,7 @@ public class GiveClientOrder : MonoBehaviour
                 isClientNearby = true;
                 if (deliverIndication != null)
                 {
-                    deliverIndication.text = "Drop an item in the delivery bag to deliver it to the client";
+                    deliverIndication.text = "Drop the item in the bag to deliver it to the client";
                 }
                 break;
             }

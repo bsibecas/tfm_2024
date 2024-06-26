@@ -7,7 +7,6 @@ public class DeliverySlot : MonoBehaviour, IDropHandler
 
     private void Start()
     {
-        // Reference the GiveClientOrder script on the relevant GameObject (e.g., the player or another manager object)
         giveClientOrder = GameObject.FindGameObjectWithTag("Player").GetComponent<GiveClientOrder>();
     }
 

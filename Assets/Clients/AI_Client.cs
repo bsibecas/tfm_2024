@@ -250,7 +250,6 @@ public class AI_Client : MonoBehaviour
 
         transform.position = exitTargetPosition;
 
-        // Ensure targetPosition is not null before accessing its component
         if (targetPosition != null)
         {
             EmptyPlace targetPoint = targetPosition.GetComponent<EmptyPlace>();

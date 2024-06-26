@@ -7,7 +7,6 @@ public class BossDialogue : MonoBehaviour
 {
     public Dialogue dialogue;
     public float interactionRange = 2.5f;
-    public TMP_Text interactionBossText;
     private Transform playerTransform;
 
     private void Start()
@@ -34,22 +33,12 @@ public class BossDialogue : MonoBehaviour
             {
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                if (hit.collider != null && hit.collider.CompareTag("Boss"))
                 {
                     StartBossDialogue();
                 }
             }
-            if (interactionBossText != null)
-            {
-                interactionBossText.text = "Click left mouse button to talk with the boss";
-            }
-        }
-        else
-        {
-            if (interactionBossText != null)
-            {
-                interactionBossText.text = "";
-            }
+         
         }
     }
 

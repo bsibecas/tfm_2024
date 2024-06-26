@@ -14,6 +14,7 @@ public class TimeSystem : MonoBehaviour
     public int minuts,seconds;
     public TextMeshProUGUI textoTimer;
     public Slider slider;
+    public Animator dialogueAnimator;
 
     private void Start()
   {
@@ -22,10 +23,10 @@ public class TimeSystem : MonoBehaviour
 
     void Update()
     {
-        if(activatedTime)
+        if(activatedTime && !dialogueAnimator.GetBool("IsOpen"))
         {
             CheckTime();
-        }   
+        }
     }
 
     private void CheckTime()
