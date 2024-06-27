@@ -30,12 +30,12 @@ public class Statistics : MonoBehaviour
 
         if (playerMoneyText != null)
         {
-            playerMoneyText.text = "Player Money: " + GameManager.playerMoney.ToString() + "$";
+            playerMoneyText.text = "Salary earned: " + GameManager.playerMoney.ToString() + "$";
         }
 
         if (shopMoneyText != null)
         {
-            shopMoneyText.text = "Shop Money: " + GameManager.shopMoney.ToString() + "$";
+            shopMoneyText.text = "Shop benefits: " + GameManager.shopMoney.ToString() + "$";
         }
 
         if (GameManager.satisfiedClients > (GameManager.clients - 1))
