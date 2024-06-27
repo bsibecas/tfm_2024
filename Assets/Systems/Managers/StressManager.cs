@@ -20,11 +20,15 @@ public class StressManager : MonoBehaviour
     private void OnEnable()
     {
         AI_Client.OnClientGone += IncreaseStress;
+        GiveClientOrder.OnWrongDelivery += IncreaseStress;
+        GiveClientOrder.OnSatisfiedClient += DecreaseStress;
     }
 
     private void OnDisable()
     {
         AI_Client.OnClientGone -= IncreaseStress;
+        GiveClientOrder.OnWrongDelivery -= IncreaseStress;
+        GiveClientOrder.OnSatisfiedClient -= DecreaseStress;
     }
 
     private void Awake()

@@ -14,6 +14,12 @@ public class GiveClientOrder : MonoBehaviour
 
     AudioManager audioManager;
 
+    public delegate void SatisfiedClient(float stressAmount);
+    public static SatisfiedClient OnSatisfiedClient;
+
+    public delegate void WrongDelivery(float stressAmount);
+    public static WrongDelivery OnWrongDelivery;
+
     private void Awake()
     {
         AssignEmptyPlaces();
@@ -108,6 +114,7 @@ public class GiveClientOrder : MonoBehaviour
                 if (orderedItemName == firstItemName)
                 {
                     correctTask = true;
+                    OnSatisfiedClient(0.1f);
                     Transform emptySlot = emptyPlaces[i];
                     Image checkImage = emptySlot.GetComponentInChildren<Image>();
                     if (emptySlot != null)
@@ -128,7 +135,7 @@ public class GiveClientOrder : MonoBehaviour
         {
             GameManager.playerMoney = GameManager.playerMoney - Mathf.RoundToInt(firstItem.GetComponent<Item>().price / 2);
             moneyManager.UpdateMoneyText();
-            StressManager.IncreaseStress(0.2f);
+            OnWrongDelivery(0.2f);
         }
 
         allTasksCompleted = true;
@@ -144,7 +151,7 @@ public class GiveClientOrder : MonoBehaviour
         if (allTasksCompleted)
         {
             GameManager.satisfiedClients++;
-            StressManager.DecreaseStress(0.1f);
+            OnSatisfiedClient(0.1f);
         }
 
         Destroy(firstItem);
