@@ -114,7 +114,6 @@ public class GiveClientOrder : MonoBehaviour
                 if (orderedItemName == firstItemName)
                 {
                     correctTask = true;
-                    OnSatisfiedClient(0.1f);
                     Transform emptySlot = emptyPlaces[i];
                     Image checkImage = emptySlot.GetComponentInChildren<Image>();
                     if (emptySlot != null)
@@ -125,6 +124,7 @@ public class GiveClientOrder : MonoBehaviour
                     }
                     findedTask = i;
                     moneyManager.AddMoney(orderedItems[i].GetComponent<Item>().price);
+                    OnSatisfiedClient(0.1f);
                     orderedItems[i] = null;
                     break;
                 }
@@ -151,7 +151,7 @@ public class GiveClientOrder : MonoBehaviour
         if (allTasksCompleted)
         {
             GameManager.satisfiedClients++;
-            OnSatisfiedClient(0.1f);
+            OnSatisfiedClient(0.2f);
         }
 
         Destroy(firstItem);

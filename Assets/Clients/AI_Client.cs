@@ -32,11 +32,12 @@ public class AI_Client : MonoBehaviour
     [SerializeField] private  Image[] CheckImages;
 
 
+    private int currentTargetID = 0;
+    private float rageProgress = 0.0f;
+    private bool isWalking = false;
     private ClientState currentState;
     private Material rageMaterial;
     private Transform[] goToPositions;
-    private bool isWalking = false;
-    private int currentTargetID = 0;
     private Transform targetPosition;
     private ClientManager clientManager;
     public Animator animator;
@@ -224,12 +225,10 @@ public class AI_Client : MonoBehaviour
 
     IEnumerator Rage()
     {
-        float progress = 0.0f;
-
-        while (progress < 1)
+        while (rageProgress < 1)
         {
-            progress += Time.deltaTime * 0.01f;
-            rageMaterial.SetFloat("_RageProgress", progress);
+            rageProgress += Time.deltaTime * 0.01f;
+            rageMaterial.SetFloat("_RageProgress", rageProgress);
             yield return new WaitForEndOfFrame();
         }
 
@@ -264,7 +263,9 @@ public class AI_Client : MonoBehaviour
         }
 
         OnClientExit?.Invoke(this);
-        OnClientGone(0.2f);
+
+        if(rageProgress >= 1f) OnClientGone(0.2f);
+
         animator.SetBool("isOpen", false);
         for (int i = 0; i < CheckImages.Length; i++)
         {
