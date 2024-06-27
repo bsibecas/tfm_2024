@@ -128,6 +128,7 @@ public class GiveClientOrder : MonoBehaviour
         {
             GameManager.playerMoney = GameManager.playerMoney - Mathf.RoundToInt(firstItem.GetComponent<Item>().price / 2);
             moneyManager.UpdateMoneyText();
+            StressManager.IncreaseStress(0.2f);
         }
 
         allTasksCompleted = true;
@@ -143,6 +144,7 @@ public class GiveClientOrder : MonoBehaviour
         if (allTasksCompleted)
         {
             GameManager.satisfiedClients++;
+            StressManager.DecreaseStress(0.1f);
         }
 
         Destroy(firstItem);

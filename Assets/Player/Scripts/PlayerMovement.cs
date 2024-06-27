@@ -125,5 +125,8 @@ public class PlayerMovement : MonoBehaviour
         sprintSpeed = originalSprintSpeed;
     }
 
-
+    public float GetPlayerVelocity()
+    {
+        return rb.velocity.magnitude;
+    }
 }

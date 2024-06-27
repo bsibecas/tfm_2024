@@ -40,16 +40,8 @@ public class TimeSystem : MonoBehaviour
         {
             slider.value = castingTime;
         }
-        if(castingTime <= 0)
+        else
         {
-            if (GameManager.satisfiedClients < GameManager.minClients)
-            { 
-                SceneManager.LoadScene("3-GameOver");
-            }
-            else
-            {
-                SceneManager.LoadScene("2-LevelClear");
-            }
             StatusTimeChange(false);
         }
     }
@@ -74,5 +66,10 @@ public class TimeSystem : MonoBehaviour
     public float GetCastingTime()
     {
         return castingTime;
+    }
+
+    public int GetMinuts()
+    {
+        return minuts;
     }
 }

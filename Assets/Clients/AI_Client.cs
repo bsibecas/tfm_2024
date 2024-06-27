@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static AI_Client;
 
 public class AI_Client : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class AI_Client : MonoBehaviour
 
     public delegate void ClientExitHandler(AI_Client client);
     public event ClientExitHandler OnClientExit;
+
+    public delegate void ClientGone(float decrement);
+    public static ClientGone OnClientGone;
 
     public delegate void PositionReachedHandler(Transform position);
     public event PositionReachedHandler OnPositionReached;
@@ -260,7 +264,7 @@ public class AI_Client : MonoBehaviour
         }
 
         OnClientExit?.Invoke(this);
-
+        OnClientGone(0.2f);
         animator.SetBool("isOpen", false);
         for (int i = 0; i < CheckImages.Length; i++)
         {

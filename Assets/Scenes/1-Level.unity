@@ -10347,6 +10347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskPannel
       objectReference: {fileID: 0}
+    - target: {fileID: 57538130980079942, guid: f32768df73ed94f02bf174166c10e10c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919257528797655204, guid: f32768df73ed94f02bf174166c10e10c, type: 3}
       propertyPath: m_fontColor.b
       value: 0.39607847
@@ -41117,6 +41121,7 @@ GameObject:
   - component: {fileID: 1958610763}
   - component: {fileID: 1958610764}
   - component: {fileID: 1958610765}
+  - component: {fileID: 1958610766}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -41289,7 +41294,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000029802322, y: -0.27467412}
+  m_Offset: {x: -0.0019791424, y: -0.010103315}
   m_SpriteTilingProperty:
     border: {x: 0.3, y: 0.05, z: 0.3, w: 0.075}
     pivot: {x: 0.5, y: 0.5}
@@ -41300,7 +41305,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32133788, y: 0.30948794}
+  m_Size: {x: 0.4044621, y: 0.8784608}
   m_EdgeRadius: 0
 --- !u!114 &1958610765
 MonoBehaviour:
@@ -41323,6 +41328,26 @@ MonoBehaviour:
   moneyManager: {fileID: 1405926678}
   deliverIndication: {fileID: 1575573108}
   deliveryBag: {fileID: 1609270748}
+--- !u!114 &1958610766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958610757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732e4b8758f77db49a55ed621311fa21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initStress: 0.1
+  stressDistance: 2.5
+  reliefAmount: 0.005
+  reliefDelay: 2
+  stressAmount: 0.01
+  stressDelay: 1
+  stressMinut: 1
+  bossTransform: {fileID: 918754271}
 --- !u!1 &1962376454
 GameObject:
   m_ObjectHideFlags: 0
@@ -45229,7 +45254,7 @@ GameObject:
   - component: {fileID: 2123712585}
   m_Layer: 5
   m_Name: Stress
-  m_TagString: Untagged
+  m_TagString: StressAmount
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

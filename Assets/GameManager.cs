@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,12 +33,12 @@ public class GameManager : MonoBehaviour
     public static int days = 0;
     public static int minClients = days + 2;
     public static bool furnaceUpgraded = false;
+    public static bool firedByStress = false;
     public static int minPlayerMoney = days * 10 + 20;
 
     public static float musicVolume = 0.70f;
     public static float SFXVolume = 0.70f;
     [SerializeField] private AudioMixer myMixer;
-
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    private void Start()
     {
         LoadVolume();
     }
