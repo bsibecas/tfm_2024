@@ -11,6 +11,7 @@ public class GiveClientOrder : MonoBehaviour
     public MoneyManager moneyManager;
     public TMP_Text deliverIndication;
     public GameObject deliveryBag;
+    public Animator tasksAnimator;
 
     AudioManager audioManager;
 
@@ -45,11 +46,13 @@ public class GiveClientOrder : MonoBehaviour
 
     private void CheckForClientInteraction()
     {
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactionRange);
         bool isClientNearby = false;
+
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Client"))
+            if (collider.CompareTag("Client") && tasksAnimator.GetBool("isOpen"))
             {
                 isClientNearby = true;
                 if (deliverIndication != null)
@@ -65,7 +68,6 @@ public class GiveClientOrder : MonoBehaviour
             deliverIndication.text = "";
         }
 
-        // Update the visibility of the deliveryBag based on the proximity to the client
         UpdateDeliveryBagVisibility(isClientNearby);
     }
 
