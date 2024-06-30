@@ -49618,6 +49618,7 @@ MonoBehaviour:
   deliverIndication: {fileID: 1575573108}
   deliveryBag: {fileID: 1609270748}
   tasksAnimator: {fileID: 1854058390}
+  dialogueAnimator: {fileID: 169597018}
 --- !u!114 &1958610766
 MonoBehaviour:
   m_ObjectHideFlags: 0

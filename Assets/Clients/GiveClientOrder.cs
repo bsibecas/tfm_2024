@@ -12,6 +12,7 @@ public class GiveClientOrder : MonoBehaviour
     public TMP_Text deliverIndication;
     public GameObject deliveryBag;
     public Animator tasksAnimator;
+    public Animator dialogueAnimator;
 
     AudioManager audioManager;
 
@@ -52,7 +53,7 @@ public class GiveClientOrder : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Client") && tasksAnimator.GetBool("isOpen"))
+            if (collider.CompareTag("Client") && tasksAnimator.GetBool("isOpen") && !dialogueAnimator.GetBool("IsOpen"))
             {
                 isClientNearby = true;
                 if (deliverIndication != null)

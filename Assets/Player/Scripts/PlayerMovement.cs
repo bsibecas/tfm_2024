@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDirection = new Vector2(moveX, moveY).normalized;
 
-        isSprinting = Input.GetKey(KeyCode.LeftShift) && (Mathf.Abs(moveX) > 0 || Mathf.Abs(moveY) > 0) && currentStamina > 0;
+        isSprinting = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && (Mathf.Abs(moveX) > 0 || Mathf.Abs(moveY) > 0) && currentStamina > 0;
     }
 
     private void Move()
