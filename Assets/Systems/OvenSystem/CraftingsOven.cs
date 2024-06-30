@@ -117,6 +117,7 @@ public class CraftingsOven : MonoBehaviour
         {
             if (recipes[i] == currentRecipeString || recipes[i] == reversedRecipeString)
             {
+                StartCoroutine(DelayedDestroy(0.1f));
                 StartCooking(i);
                 break;
             }
@@ -128,7 +129,6 @@ public class CraftingsOven : MonoBehaviour
         isCooking = true;
         recipeNumber = recipeIndex;
         ActiveTime();
-        StartCoroutine(DelayedDestroy(0.3f));
     }
 
     private void CookingFinished()
